@@ -1,41 +1,53 @@
 package controller.utilisateur;
 
+import java.io.IOException;
+
+import bll.UtilisateurBLL;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-/**
- * Servlet implementation class InscriptionServlet
- */
-@WebServlet("/InscriptionServlet")
+
+
+@WebServlet("/Inscription")
 public class InscriptionServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InscriptionServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private static final long serialVersionUID = 1L;       
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		
+		
+		String identifiant = request.getParameter("identifiant");
+		String mdp = request.getParameter("mdp");
+		String mdpConfirm = request.getParameter("mdp_confirmation");
+		String prenom = request.getParameter("prenom");
+		String nom = request.getParameter("nom");
+		String telephone = request.getParameter("telephone");
+		String email = request.getParameter("email");
+		
+		if(!mdp.equals(mdpConfirm)) {
+			request.setAttribute("identifiant", identifiant);
+			request.setAttribute("prenom", prenom);
+			request.setAttribute("nom", nom);
+			request.setAttribute("telephone", telephone);
+			request.setAttribute("email", email);
+			request.setAttribute("erreur_mdp", "Les champs de mot de passe ne correspondent pas !");
+			request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp").forward(request, response);
+		}else {
+			
+			UtilisateurBLL bll = new UtilisateurBLL();
+			bll.insert(nom, prenom, identifiant, mdp, telephone, email);
+			
+			response.sendRedirect("Connexion");			
+		}
+		
+		
 	}
 
 }

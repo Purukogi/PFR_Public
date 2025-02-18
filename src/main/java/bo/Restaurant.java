@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity @Table(name = "restaurants")
 public class Restaurant {
 	
@@ -31,7 +34,8 @@ public class Restaurant {
 	@JoinColumn(name = "id_restaurant")
 	private List<TableRestaurant> tables;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "id_restaurant")
 	private List<Horaire> horaires;
 
