@@ -7,6 +7,7 @@ import java.security.spec.KeySpec;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.persistence.TypedQuery;
 
 import bo.Role;
 import bo.Utilisateur;
@@ -18,6 +19,16 @@ public class UtilisateurBLL {
 	
 	public UtilisateurBLL() {
 		dao = new UtilisateurDAO();
+	}
+	
+	public Utilisateur selectByEmailEtMdp(String email, String mdp) {
+		//check if exists
+		return dao.selectByEmailEtMdp(email, mdp);
+	}
+	
+	public Utilisateur selectByLoginEtMdp(String login, String mdp) {
+		//check if exists
+		return dao.selectByEmailEtMdp(login, mdp);
 	}
 	
 	public void insert(String nom, String prenom, String identifiant, String mdp, String telephone, String email ) {
