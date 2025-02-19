@@ -11,6 +11,7 @@ import javax.crypto.spec.PBEKeySpec;
 import bo.Role;
 import bo.Utilisateur;
 import dal.UtilisateurDAO;
+import exceptions.UtilisateurException;
 
 public class UtilisateurBLL {
 	
@@ -20,7 +21,7 @@ public class UtilisateurBLL {
 		dao = new UtilisateurDAO();
 	}
 	
-	public void insert(String nom, String prenom, String identifiant, String mdp, String telephone, String email ) {
+	public void insert(String nom, String prenom, String identifiant, String mdp, String telephone, String email ) throws UtilisateurException {
 				
 		Utilisateur client = new Utilisateur();
 		client.setNom(nom);
@@ -31,7 +32,7 @@ public class UtilisateurBLL {
 		Role role = new Role("CLI", "Client");
 		client.setRole(role);
 		
-		//checkUtilisateur(client);
+		checkUtilisateur(client);
 		
 		generateSalt(client);
 		client.setMdp(hashMdp(mdp, client.getSalt()));
@@ -41,6 +42,7 @@ public class UtilisateurBLL {
 	}
 	
 	private void generateSalt(Utilisateur client) {
+		
 		SecureRandom random = new SecureRandom();
 		byte[] salt = new byte[16];
 		random.nextBytes(salt);
@@ -48,6 +50,7 @@ public class UtilisateurBLL {
 	}
 	
 	private byte[] hashMdp(String mdp, byte[] salt) {
+		
 		KeySpec spec = new PBEKeySpec(mdp.toCharArray(), salt, 65536, 128);
 		try {
 			SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
@@ -57,6 +60,48 @@ public class UtilisateurBLL {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void checkUtilisateur(Utilisateur client) throws UtilisateurException {
+		
+		UtilisateurException exception = new UtilisateurException();
+		
+		if (client.getNom().isBlank()) {
+			exception.addMessage("Le nom ne peut pas être laissé vide !");
+		}
+		
+		if (client.getPrenom().isBlank()) {
+			exception.addMessage("Le prénom ne peut pas être laissé vide !");
+		}
+		
+		if (client.getEmail().isBlank()) {
+			exception.addMessage("L'e-mail ne peut pas être laissé vide !");
+		}
+		
+		if (client.getNom().length() > 30) {
+			exception.addMessage("Le nom ne peut pas faire plus de 30 caractères !");
+		}
+		
+		if (client.getPrenom().length() > 30) {
+			exception.addMessage("Le prénom ne peut pas faire plus de 30 caractères !");
+		}
+		
+		if (client.getLogin().length() > 30) {
+			exception.addMessage("L'identifiant ne peut pas faire plus de 30 caractères !");
+		}
+		
+		if (client.getEmail().length() > 60) {
+			exception.addMessage("L'e-mail ne peut pas faire plus de 60 caractères !");
+		}
+		
+		if (client.getTelephone().length() > 20) {
+			exception.addMessage("Le numéro de téléphone ne peut pas faire plus de 20 caractères !");
+		}
+		
+		if (exception.getMessages().size() > 0) {
+			throw exception;
+		}
+		
 	}
 	
 }

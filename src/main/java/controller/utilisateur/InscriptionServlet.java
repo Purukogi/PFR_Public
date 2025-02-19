@@ -3,6 +3,7 @@ package controller.utilisateur;
 import java.io.IOException;
 
 import bll.UtilisateurBLL;
+import exceptions.UtilisateurException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,18 +32,28 @@ public class InscriptionServlet extends HttpServlet {
 		String telephone = request.getParameter("telephone");
 		String email = request.getParameter("email");
 		
+		//on ajoute les infos à la requête pour préremplir le formulaire en cas d'erreur
+		request.setAttribute("identifiant", identifiant);
+		request.setAttribute("prenom", prenom);
+		request.setAttribute("nom", nom);
+		request.setAttribute("telephone", telephone);
+		request.setAttribute("email", email);
+		
 		if(!mdp.equals(mdpConfirm)) {
-			request.setAttribute("identifiant", identifiant);
-			request.setAttribute("prenom", prenom);
-			request.setAttribute("nom", nom);
-			request.setAttribute("telephone", telephone);
-			request.setAttribute("email", email);
-			request.setAttribute("erreur_mdp", "Les champs de mot de passe ne correspondent pas !");
+			
+			request.setAttribute("erreurs_inscription", "Les champs de mot de passe ne correspondent pas !");
 			request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp").forward(request, response);
-		}else {
+			
+		}else {			
 			
 			UtilisateurBLL bll = new UtilisateurBLL();
-			bll.insert(nom, prenom, identifiant, mdp, telephone, email);
+			
+			try {
+				bll.insert(nom, prenom, identifiant, mdp, telephone, email);
+			} catch (UtilisateurException e) {
+				request.setAttribute("erreurs_inscription", e.getMessages());
+				request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp").forward(request, response);
+			}
 			
 			response.sendRedirect("Connexion");			
 		}

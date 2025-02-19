@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,14 @@
 	<main>
 		<div>
 			<div id="erreur_mdp">
-				${erreur_mdp }
+				${erreur_msp }
+			</div>
+			<div id="erreur_inscription">
+				<ul>
+					<c:forEach var="message" items="${erreurs_inscription }">
+						<li>${message }</li>
+					</c:forEach>
+				</ul>
 			</div>
 			<form action="Inscription" method="POST">
 				<div>
