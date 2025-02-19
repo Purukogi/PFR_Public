@@ -7,35 +7,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import bll.RestaurantBLL;
+import bo.Restaurant;
+
 /**
  * Servlet implementation class DetailRestaurantServlet
  */
-@WebServlet("/DetailRestaurantServlet")
+@WebServlet("/detail-restaurant")
 public class DetailRestaurantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static RestaurantBLL restaurantBLL = new RestaurantBLL();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DetailRestaurantServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		int id = Integer.valueOf(request.getParameter("id"));
+		
+		Restaurant restaurant = restaurantBLL.selectEtTrierPlatsParCategorie(id);
+		request.setAttribute("restaurant", restaurant);
+		request.getRequestDispatcher("/WEB-INF/jsp/detail_restaurant.jsp").forward(request, response);
 	}
 
 }

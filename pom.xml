@@ -19,7 +19,6 @@
       </plugin>
     </plugins>
   </build>
-  
   <dependencies>
   	<dependency>
      	<groupId>org.hibernate</groupId>
@@ -57,5 +56,4 @@
 	    <version>2.3.2</version>
 	</dependency>
   </dependencies>
-  
 </project>

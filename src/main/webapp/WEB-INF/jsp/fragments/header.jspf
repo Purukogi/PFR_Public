@@ -22,7 +22,7 @@
                                 <a class="nav-link mx-lg-2 active" aria-current="page" href="accueil">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="lister-restaurant">Nos restaurants</a>
+                                <a class="nav-link mx-lg-2" href="lister-restaurants">Nos restaurants</a>
                             </li>
                         </ul>
     

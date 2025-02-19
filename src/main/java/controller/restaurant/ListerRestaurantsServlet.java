@@ -6,36 +6,27 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+
+import bll.RestaurantBLL;
+import bo.Restaurant;
 
 /**
  * Servlet implementation class ListerRestaurantsServlet
  */
-@WebServlet("/ListerRestaurantsServlet")
+@WebServlet("/lister-restaurants")
 public class ListerRestaurantsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ListerRestaurantsServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private static RestaurantBLL restaurantBLL = new RestaurantBLL();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		List<Restaurant> restaurants = restaurantBLL.select();
+		request.setAttribute("listeRestaurants", restaurants);
+		
+		request.getRequestDispatcher("/WEB-INF/jsp/liste_restaurants.jsp").forward(request, response);
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	
 
 }
