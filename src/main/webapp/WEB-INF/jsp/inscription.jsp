@@ -16,21 +16,25 @@
 </head>
 <body>
 	<%@include file="fragments/header.jspf" %>
-	<main>
-		<div >
-			<div id="erreur_mdp">
-				${erreur_msp }
-			</div>
-			<div id="erreur_inscription">
+	<main>	
+		<div id="formulaire_inscription">
+			<form action="inscription" method="POST">
+			<div >
+			<c:if test="${!empty erreur_mdp}">
+				<div id="erreur_mdp" class="alert alert-danger">
+					${erreur_mdp }
+				</div>
+			</c:if>
+			<c:if test="${!empty erreurs_inscription }">
+				<div id="erreur_inscription" class="alert alert-danger">
 				<ul>
 					<c:forEach var="message" items="${erreurs_inscription }">
 						<li>${message }</li>
 					</c:forEach>
 				</ul>
+				</div>
+			</c:if>			
 			</div>
-		</div>
-		<div id="formulaire_inscription">
-			<form action="inscription" method="POST">
 			<div id="formulaire_inscription_contenu">
 				<div id="inscription_col1">
 					<div>
