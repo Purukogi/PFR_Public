@@ -17,7 +17,7 @@
 <body>
 	<%@include file="fragments/header.jspf" %>
 	<main>
-		<div>
+		<div >
 			<div id="erreur_mdp">
 				${erreur_msp }
 			</div>
@@ -28,36 +28,44 @@
 					</c:forEach>
 				</ul>
 			</div>
-			<form action="inscription" method="POST">
-				<div>
-					<label for="identifiant">Identifiant :</label>
-					<input type="text" name="identifiant" id="identifiant" placeholder="Identifiant" value="${identifiant }">
+		</div>
+		<div id="formulaire_inscription">
+			<form action="inscription" method="POST" id="formulaire_inscription_contenu">
+				<div id="inscription_col1">
+					<div>
+						<label for="identifiant">Identifiant :</label>
+						<input type="text" name="identifiant" id="identifiant" placeholder="Identifiant" value="${identifiant }" class="form-control">
+					</div>
+					<div>
+						<label for="email">Email :</label>
+						<input type="text" name="email" id="email" placeholder="Adresse E-Mail" value="${email }" class="form-control"> 
+					</div>
+					<div>
+						<label for="mdp">Mot de passe :</label>
+						<input type="password" name="mdp" id="mdp" class="form-control">
+					</div>
+					<div>
+						<label for="mdp_confirmation">Confirmez le mot de passe :</label>
+						<input type="password" name="mdp_confirmation" id="mdp_confirmation" class="form-control">
+					</div>			
 				</div>
-				<div>
-					<label for="mdp">Mot de passe :</label>
-					<input type="password" name="mdp" id="mdp">
+				<div id="inscription_col2">
+					<div>
+						<label for="prenom">Prénom :</label>
+						<input type="text" name="prenom" id="prenom" placeholder="Votre prénom" value="${prenom }" class="form-control">
+					</div>
+					<div>
+						<label for="nom">Nom :</label>
+						<input type="text" name="nom" id="nom" placeholder="Votre nom" value="${nom }" class="form-control">
+					</div>
+					<div>
+						<label for="telephone">Numéro de téléphone :</label>
+						<input type="text" name="telephone" id="telephone" placeholder="Numéro de téléphone" value="${telephone }" class="form-control">
+					</div>
+					<div id="inscription_boutton">				
+						<input type="submit" value="Envoyer" class="btn btn-primary d-none d-lg-block">
+					</div>
 				</div>
-				<div>
-					<label for="mdp_confirmation">Confirmez le mot de passe :</label>
-					<input type="password" name="mdp_confirmation" id="mdp_confirmation">
-				</div>
-				<div>
-					<label for="prenom">Prénom :</label>
-					<input type="text" name="prenom" id="prenom" placeholder="Votre prénom" value="${prenom }">
-				</div>
-				<div>
-					<label for="nom">Nom :</label>
-					<input type="text" name="nom" id="nom" placeholder="Votre nom" value="${nom }">
-				</div>
-				<div>
-					<label for="telephone">Numéro de téléphone :</label>
-					<input type="text" name="telephone" id="telephone" placeholder="Numéro de téléphone" value="${telephone }">
-				</div>
-				<div>
-					<label for="email">Email :</label>
-					<input type="text" name="email" id="email" placeholder="Adresse E-Mail" value="${email }">
-				</div>
-				<input type="submit" value="Envoyer">
 			</form>
 		</div>
 	</main>
