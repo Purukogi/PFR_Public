@@ -2,8 +2,8 @@
     <header>
         <nav class="navbar navbar-expand-lg fixed-top bg-light shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex flex-column align-items-center text-center" href="#">
-                    <img src="pates.png" alt="Logo" class="d-inline-block align-text-bottom" height="40">
+                <a class="navbar-brand d-flex flex-column align-items-center text-center" href="accueil">
+                    <img src="img/pates.png" alt="Logo" class="d-inline-block align-text-bottom" height="40">
                     <span class="fw-bold text-wrap fs-4 fs-md-3 fs-lg-2">Pâtes d'or</span>
                 </a>
     
@@ -19,17 +19,17 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2 active" aria-current="page" href="#">Accueil</a>
+                                <a class="nav-link mx-lg-2 active" aria-current="page" href="accueil">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="#">Nos restaurants</a>
+                                <a class="nav-link mx-lg-2" href="lister-restaurant">Nos restaurants</a>
                             </li>
                         </ul>
     
-                        <a href="#" class="btn btn-primary d-lg-none mt-3 w-100">Se connecter</a>
+                        <a href="connexion" class="btn btn-primary d-lg-none mt-3 w-100">Se connecter</a>
                     </div>
                 </div>
-                <a href="#" class="btn btn-primary d-none d-lg-block ms-auto">Se connecter</a>
+                <a href="connexion" class="btn btn-primary d-none d-lg-block ms-auto">Se connecter</a>
             </div>
         </nav>
     </header>
