@@ -4,10 +4,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.Base64;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import javax.persistence.TypedQuery;
 
 import bo.Role;
 import bo.Utilisateur;
@@ -16,6 +16,9 @@ import dal.UtilisateurDAO;
 public class UtilisateurBLL {
 	
 	private UtilisateurDAO dao;
+	
+	private static final SecureRandom secureRandom = new SecureRandom(); //threadsafe
+	private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
 	
 	public UtilisateurBLL() {
 		dao = new UtilisateurDAO();
@@ -68,6 +71,15 @@ public class UtilisateurBLL {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public String generateToken(Utilisateur client) {
+		byte[] randomBytes = new byte[24];
+	    secureRandom.nextBytes(randomBytes);
+	    String token = base64Encoder.encodeToString(randomBytes);
+	    client.setToken(token);
+	    dao.updateToken(client);
+		return token;
 	}
 	
 }

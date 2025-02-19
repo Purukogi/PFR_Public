@@ -1,11 +1,19 @@
 package dal;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
+import javax.sql.DataSource;
 
 import bo.Utilisateur;
 
@@ -49,6 +57,19 @@ public class UtilisateurDAO {
 		}
 		
 		em.close();
+	}
+	
+	public void updateToken(Utilisateur client) {
+		
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Utilisateur> query = em.createNamedQuery("updateToken", Utilisateur.class);
+		
+		query.setParameter("token", client.getToken())
+			 .setParameter("id", client.getId())
+			 .getSingleResult();
+		
+		query.executeUpdate();
+		
 	}
 	
 }
