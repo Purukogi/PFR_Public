@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery (name = "selectByLogin",
 			 	 query="SELECT u FROM Utilisateur u WHERE u.login= :login"),
+	@NamedQuery (name = "selectByEmail",
+	 			 query="SELECT u FROM Utilisateur u WHERE u.email= :email"),
 	@NamedQuery (name = "selectByEmailEtMdp",
 				 query="SELECT u FROM Utilisateur u WHERE u.email= :email AND u.mdp= :mdp"),
 	@NamedQuery (name = "selectByLoginEtMdp",
@@ -136,5 +138,12 @@ public class Utilisateur {
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", telephone="
+				+ telephone + ", email=" + email + ", role=" + role + "]";
+	}	
+	
 
 }
