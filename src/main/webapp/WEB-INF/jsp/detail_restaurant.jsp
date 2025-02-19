@@ -47,6 +47,7 @@
 	    		<c:set var="categorie" value="${entry.key}"/>
 	    		<c:set var="plats" value="${entry.value}"/>
 	            <h3 class="mb-3 mt-4 vert">${categorie.libelle}</h3>
+
 	            <ul>
 	            <c:forEach var="plat" items="${plats}">
 	            	<li>${plat.nom} : ${plat.description} - ${plat.prix} €</li>
@@ -54,6 +55,7 @@
 	            </ul>
 	        </c:forEach>
 	    	</c:if>
+
 	</div>
 </section>
 
