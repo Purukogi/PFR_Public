@@ -162,4 +162,5 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
+/build
 src/main/resources/
