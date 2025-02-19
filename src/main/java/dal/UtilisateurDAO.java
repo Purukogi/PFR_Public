@@ -4,10 +4,10 @@ package dal;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
-
 
 import bo.Utilisateur;
 
@@ -23,8 +23,26 @@ public class UtilisateurDAO {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByLogin", Utilisateur.class);
 		
-		return query.setParameter("login", login)
-					.getSingleResult();
+		try {
+			query.setParameter("login", login);
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+		
+	}
+	
+	public Utilisateur selectByEmail(String email) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByEmail", Utilisateur.class);
+		
+		try {
+			query.setParameter("email", email);
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+		
 	}
 	
 	public Utilisateur selectByEmailEtMdp(String email, String mdp) {
