@@ -30,7 +30,8 @@
 			</div>
 		</div>
 		<div id="formulaire_inscription">
-			<form action="inscription" method="POST" id="formulaire_inscription_contenu">
+			<form action="inscription" method="POST">
+			<div id="formulaire_inscription_contenu">
 				<div id="inscription_col1">
 					<div>
 						<label for="identifiant">Identifiant :</label>
@@ -61,10 +62,11 @@
 					<div>
 						<label for="telephone">Numéro de téléphone :</label>
 						<input type="text" name="telephone" id="telephone" placeholder="Numéro de téléphone" value="${telephone }" class="form-control">
-					</div>
-					<div id="inscription_boutton">				
-						<input type="submit" value="Envoyer" class="btn btn-primary d-none d-lg-block">
-					</div>
+					</div>					
+				</div>
+				</div>
+				<div id="inscription_boutton">				
+					<input type="submit" value="Envoyer" class="btn btn-primary d-none d-lg-block">
 				</div>
 			</form>
 		</div>
