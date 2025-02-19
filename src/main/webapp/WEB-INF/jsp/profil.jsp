@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,35 +18,37 @@
 	<%@include file="fragments/header.jspf" %>
 	<main>
 		<div id="formulaire_profil">
-			<form action="inscription" method="POST">
+			<form action="modification" method="GET">
 			<div id="formulaire_profil_contenu">
 				<div id="profil_col1">
 					<div>
 						<label for="prenom">Prénom :</label>
-						<input type="text" name="prenom" id="prenom" placeholder="Votre prénom" value="${prenom }" class="form-control">
+						<input type="text" name="prenom" id="prenom" placeholder="Votre prénom" value="${sessionScope.utilisateur.prenom }" class="form-control" disabled>
 					</div>
 					<div>
-						<label for="nom">Nom :</label>
-						<input type="text" name="nom" id="nom" placeholder="Votre nom" value="${nom }" class="form-control">
+						<label for="email">Email :</label>
+						<input type="text" name="email" id="email" placeholder="Adresse E-Mail" value="${sessionScope.utilisateur.email }" class="form-control" disabled> 
 					</div>
 					<div>
 						<label for="telephone">Numéro de téléphone :</label>
-						<input type="text" name="telephone" id="telephone" placeholder="Numéro de téléphone" value="${telephone }" class="form-control">
+						<input type="text" name="telephone" id="telephone" placeholder="Numéro de téléphone" value="${sessionScope.utilisateur.telephone }" class="form-control" disabled>
 					</div>					
 				</div>
 				<div id="profil_col2">
 					<div>
-						<label for="identifiant">Identifiant :</label>
-						<input type="text" name="identifiant" id="identifiant" placeholder="Identifiant" value="${sessionScope.utilisateur.identifiant }" class="form-control">
+						<label for="nom">Nom :</label>
+						<input type="text" name="nom" id="nom" placeholder="Votre nom" value="${sessionScope.utilisateur.nom }" class="form-control" disabled>
 					</div>
 					<div>
-						<label for="email">Email :</label>
-						<input type="text" name="email" id="email" placeholder="Adresse E-Mail" value="${sessionScope.utilisateur.email }" class="form-control"> 
+						<label for="identifiant">Identifiant :</label>
+						<input type="text" name="identifiant" id="identifiant" placeholder="Identifiant" value="${sessionScope.utilisateur.login }" class="form-control" disabled>
 					</div>			
 				</div>				
 			</div>
-			<div id="inscription_boutton">				
-				<input type="submit" value="Envoyer" class="btn btn-primary d-none d-lg-block">
+			<div id="inscription_bouton">				
+				<input type="submit" value="Modifier" class="btn btn-primary">
+				<button type="button" class="btn btn-warning">Déconnexion</button>
+				<button type="button" class="btn btn-danger">Supprimer</button>
 			</div>
 			</form>
 		</div>

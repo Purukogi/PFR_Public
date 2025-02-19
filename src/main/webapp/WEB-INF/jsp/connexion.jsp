@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +37,7 @@
 					<input type="checkbox" name="souvenir" id="souvenir">
 				</div>
 				<div>					
-					<input type="submit" value="Se connecter" class="btn btn-primary d-none d-lg-block">
+					<input type="submit" value="Se connecter" class="btn btn-primary">
 					Pas encore inscrit ? <a href="inscription">Rejoignez-nous !</a>
 				</div>				
 			</form>		
