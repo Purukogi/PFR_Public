@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.Arrays;
 import java.util.Base64;
 
 import javax.crypto.SecretKeyFactory;
@@ -25,6 +26,10 @@ public class UtilisateurBLL {
 		dao = new UtilisateurDAO();
 	}
 	
+	public Utilisateur selectByLogin(String login) {
+		return dao.selectByLogin(login);
+	}
+	
 	public Utilisateur selectByEmailEtMdp(String email, String mdp) {
 		//check if exists
 		return dao.selectByEmailEtMdp(email, mdp);
@@ -32,7 +37,13 @@ public class UtilisateurBLL {
 	
 	public Utilisateur selectByLoginEtMdp(String login, String mdp) {
 		//check if exists
-		return dao.selectByEmailEtMdp(login, mdp);
+		Utilisateur client = selectByLogin(login);
+		byte[] hashedMdp = hashMdp(mdp, client.getSalt());
+		if (Arrays.equals(hashedMdp, client.getMdp())) {
+			return client;
+		} else {
+			return null;
+		}
 	}
 	
 

@@ -50,7 +50,7 @@ public class InscriptionServlet extends HttpServlet {
 			
 			try {
 				bll.insert(nom, prenom, identifiant, mdp, telephone, email);
-				response.sendRedirect("Connexion");
+				response.sendRedirect("connexion");
 				
 			} catch (UtilisateurException e) {
 				request.setAttribute("erreurs_inscription", e.getMessages());

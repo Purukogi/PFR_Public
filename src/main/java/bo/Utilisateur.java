@@ -14,10 +14,12 @@ import javax.persistence.Table;
 @Table(name="utilisateurs")
 
 @NamedQueries({
+	@NamedQuery (name = "selectByLogin",
+			 	 query="SELECT u FROM Utilisateur u WHERE u.login= :login"),
 	@NamedQuery (name = "selectByEmailEtMdp",
-				 query="SELECT u FROM Utilisateur u WHERE u.email= :email, u.mdp= :mdp"),
+				 query="SELECT u FROM Utilisateur u WHERE u.email= :email AND u.mdp= :mdp"),
 	@NamedQuery (name = "selectByLoginEtMdp",
-	 			 query="SELECT u FROM Utilisateur u WHERE u.login= :login, u.mdp= :mdp"),
+	 			 query="SELECT u FROM Utilisateur u WHERE u.login= :login AND u.mdp= :mdp"),
 	@NamedQuery (name = "updateToken",
 				 query= "UPDATE Utilisateur u SET u.token = :token WHERE u.id = :id")
 })

@@ -1,19 +1,13 @@
 package dal;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
-import javax.sql.DataSource;
+
 
 import bo.Utilisateur;
 
@@ -25,6 +19,14 @@ public class UtilisateurDAO {
 		emf = Persistence.createEntityManagerFactory("SQLServer");
 	}
 	
+	public Utilisateur selectByLogin(String login) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByLogin", Utilisateur.class);
+		
+		return query.setParameter("login", login)
+					.getSingleResult();
+	}
+	
 	public Utilisateur selectByEmailEtMdp(String email, String mdp) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByEmailEtMdp", Utilisateur.class);
@@ -34,12 +36,12 @@ public class UtilisateurDAO {
 					.getSingleResult();
 	}
 	
-	public Utilisateur selectByLoginEtMdp(String login, String mdp) {
+	public Utilisateur selectByLoginEtMdp(String login, byte[] hashedMdp) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByLoginEtMdp", Utilisateur.class);
 		
-		return query.setParameter("email", login)
-					.setParameter("mdp", mdp)
+		return query.setParameter("login", login)
+					.setParameter("mdp", hashedMdp)
 					.getSingleResult();
 	}
 	
