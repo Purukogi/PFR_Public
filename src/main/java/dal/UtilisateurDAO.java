@@ -1,10 +1,13 @@
 package dal;
 
+
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TransactionRequiredException;
+import javax.persistence.TypedQuery;
+
 
 import bo.Utilisateur;
 
@@ -16,6 +19,31 @@ public class UtilisateurDAO {
 		emf = Persistence.createEntityManagerFactory("SQLServer");
 	}
 	
+	public Utilisateur selectByLogin(String login) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByLogin", Utilisateur.class);
+		
+		return query.setParameter("login", login)
+					.getSingleResult();
+	}
+	
+	public Utilisateur selectByEmailEtMdp(String email, String mdp) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByEmailEtMdp", Utilisateur.class);
+		
+		return query.setParameter("email", email)
+					.setParameter("mdp", mdp)
+					.getSingleResult();
+	}
+	
+	public Utilisateur selectByLoginEtMdp(String login, byte[] hashedMdp) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByLoginEtMdp", Utilisateur.class);
+		
+		return query.setParameter("login", login)
+					.setParameter("mdp", hashedMdp)
+					.getSingleResult();
+	}
 	
 	public void insert(Utilisateur client) {
 		
@@ -31,6 +59,19 @@ public class UtilisateurDAO {
 		}
 		
 		em.close();
+	}
+	
+	public void updateToken(Utilisateur client) {
+		
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Utilisateur> query = em.createNamedQuery("updateToken", Utilisateur.class);
+		
+		query.setParameter("token", client.getToken())
+			 .setParameter("id", client.getId())
+			 .getSingleResult();
+		
+		query.executeUpdate();
+		
 	}
 	
 }

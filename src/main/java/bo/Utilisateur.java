@@ -6,10 +6,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="utilisateurs")
+
+@NamedQueries({
+	@NamedQuery (name = "selectByLogin",
+			 	 query="SELECT u FROM Utilisateur u WHERE u.login= :login"),
+	@NamedQuery (name = "selectByEmailEtMdp",
+				 query="SELECT u FROM Utilisateur u WHERE u.email= :email AND u.mdp= :mdp"),
+	@NamedQuery (name = "selectByLoginEtMdp",
+	 			 query="SELECT u FROM Utilisateur u WHERE u.login= :login AND u.mdp= :mdp"),
+	@NamedQuery (name = "updateToken",
+				 query= "UPDATE Utilisateur u SET u.token = :token WHERE u.id = :id")
+})
+
 public class Utilisateur {
 	
 	@Id

@@ -4,6 +4,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.Arrays;
+import java.util.Base64;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -17,11 +19,36 @@ public class UtilisateurBLL {
 	
 	private UtilisateurDAO dao;
 	
+	private static final SecureRandom secureRandom = new SecureRandom(); //threadsafe
+	private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
+	
 	public UtilisateurBLL() {
 		dao = new UtilisateurDAO();
 	}
 	
+	public Utilisateur selectByLogin(String login) {
+		return dao.selectByLogin(login);
+	}
+	
+	public Utilisateur selectByEmailEtMdp(String email, String mdp) {
+		//check if exists
+		return dao.selectByEmailEtMdp(email, mdp);
+	}
+	
+	public Utilisateur selectByLoginEtMdp(String login, String mdp) {
+		//check if exists
+		Utilisateur client = selectByLogin(login);
+		byte[] hashedMdp = hashMdp(mdp, client.getSalt());
+		if (Arrays.equals(hashedMdp, client.getMdp())) {
+			return client;
+		} else {
+			return null;
+		}
+	}
+	
+
 	public void insert(String nom, String prenom, String identifiant, String mdp, String telephone, String email ) throws UtilisateurException {
+
 				
 		Utilisateur client = new Utilisateur();
 		client.setNom(nom);
@@ -62,6 +89,16 @@ public class UtilisateurBLL {
 		return null;
 	}
 	
+
+	public String generateToken(Utilisateur client) {
+		byte[] randomBytes = new byte[24];
+	    secureRandom.nextBytes(randomBytes);
+	    String token = base64Encoder.encodeToString(randomBytes);
+	    client.setToken(token);
+	    dao.updateToken(client);
+		return token;
+	}
+
 	public void checkUtilisateur(Utilisateur client) throws UtilisateurException {
 		
 		UtilisateurException exception = new UtilisateurException();
