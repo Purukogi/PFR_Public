@@ -14,7 +14,7 @@ import bo.Restaurant;
 /**
  * Servlet implementation class ListerRestaurantsServlet
  */
-@WebServlet("/ListerRestaurants")
+@WebServlet("/lister-restaurants")
 public class ListerRestaurantsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static RestaurantBLL restaurantBLL = new RestaurantBLL();
