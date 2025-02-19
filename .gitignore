@@ -266,3 +266,4 @@ buildNumber.properties
 .classpath
 
 src/main/resources/
+/build/
