@@ -1,12 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-</html>
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top bg-light shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex flex-column align-items-center text-center" href="accueil">
+                    <img src="img/pates.png" alt="Logo" class="d-inline-block align-text-bottom" height="40">
+                    <span class="fw-bold text-wrap fs-4 fs-md-3 fs-lg-2">Pâtes d'or</span>
+                </a>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2 active" aria-current="page" href="accueil">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="lister-restaurant">Nos restaurants</a>
+                            </li>
+                        </ul>
+    
+                        <a href="connexion" class="btn btn-primary d-lg-none mt-3 w-100">Se connecter</a>
+                    </div>
+                </div>
+                <a href="connexion" class="btn btn-primary d-none d-lg-block ms-auto">Se connecter</a>
+            </div>
+        </nav>
+    </header>
