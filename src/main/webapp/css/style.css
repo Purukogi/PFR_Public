@@ -111,3 +111,10 @@ h2 {
 .social-icon:hover {
     color: #095228 !important;
 }
+
+#formulaire_connexion {
+	width: 100vh;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
