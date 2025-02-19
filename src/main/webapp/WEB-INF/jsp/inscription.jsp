@@ -23,7 +23,7 @@
 			<form action="Inscription" method="POST">
 				<div>
 					<label for="identifiant">Identifiant :</label>
-					<input type="text" name="identifiant" id="identifiant" placeholder="Email ou login" value="${identifiant }">
+					<input type="text" name="identifiant" id="identifiant" placeholder="Identifiant" value="${identifiant }">
 				</div>
 				<div>
 					<label for="mdp">Mot de passe :</label>
