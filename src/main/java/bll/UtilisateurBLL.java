@@ -106,7 +106,7 @@ public class UtilisateurBLL {
 		client.setSalt(salt);
 	}
 	
-	private byte[] hashMdp(String mdp, byte[] salt) {
+	public byte[] hashMdp(String mdp, byte[] salt) {
 		
 		KeySpec spec = new PBEKeySpec(mdp.toCharArray(), salt, 65536, 128);
 		try {
