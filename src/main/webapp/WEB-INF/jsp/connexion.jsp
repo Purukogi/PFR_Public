@@ -16,33 +16,37 @@
 </head>
 <body>
 	<%@include file="fragments/header.jspf" %>
-	<main>
-		<div id="formulaire_connexion">
-			<form action="connexion" method="POST" >
-				<c:if test="${!empty erreur_login }">
-					<div class="alert alert-danger">
-						${erreur_login }
-					</div>
-				</c:if>	
-				<div>
-					<label for="identifiant">Identifiant :</label>
-					<input type="text" name="identifiant" id="identifiant" placeholder="Email ou login" class="form-control">
-				</div>
-				<div>
-					<label for="mdp">Mot de passe :</label>
-					<input type="password" name="mdp" id="mdp" class="form-control">
-				</div>				
-				<div>
-					<label for="souvenir">Se souvenir de moi ?</label>
-					<input type="checkbox" name="souvenir" id="souvenir">
-				</div>
-				<div>					
-					<input type="submit" value="Se connecter" class="btn btn-primary">
-					Pas encore inscrit ? <a href="inscription">Rejoignez-nous !</a>
-				</div>				
-			</form>		
-		</div>
-				
+	<main>	
+		<div class="container d-flex align-items-center justify-content-center formulaire_utilisateur">
+	        <div class="card p-4 bg-light shadow-lg">
+	            <div class="card-body">
+	                <h1 class="titreformulaire text-center display-6">Connexion</h1>
+	                <form action="connexion" method="POST" >
+						<c:if test="${!empty erreur_login }">
+							<div class="alert alert-danger">
+								${erreur_login }
+							</div>
+						</c:if>	
+						<div>
+							<label for="identifiant">Identifiant :</label>
+							<input type="text" name="identifiant" id="identifiant" placeholder="Email ou login" class="form-control">
+						</div>
+						<div>
+							<label for="mdp">Mot de passe :</label>
+							<input type="password" name="mdp" id="mdp" class="form-control">
+						</div>				
+						<div class="text-center">
+							<label for="souvenir">Se souvenir de moi ?</label>
+							<input type="checkbox" name="souvenir" id="souvenir">
+						</div>
+						<div>					
+							<input type="submit" value="Se connecter" class="btn btn-primary">
+							Pas encore inscrit ? <a href="inscription">Rejoignez-nous !</a>
+						</div>				
+					</form>
+	            </div>
+	        </div>
+	    </div>			
 	</main>
 	<%@include file="fragments/footer.jspf" %>
 </body>
