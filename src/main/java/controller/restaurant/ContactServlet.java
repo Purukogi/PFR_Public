@@ -7,35 +7,45 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import bll.RestaurantBLL;
+import bo.Restaurant;
+
 /**
  * Servlet implementation class ContactServlet
  */
-@WebServlet("/ContactServlet")
+@WebServlet("/contact")
 public class ContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ContactServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private RestaurantBLL restaurantBLL = new RestaurantBLL();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int id = Integer.valueOf(request.getParameter("id"));
+		Restaurant restaurant = restaurantBLL.selectById(id);
+		request.setAttribute("restaurant", restaurant);
+		
+        if (request.getSession().getAttribute("messageSent") != null) {
+            request.setAttribute("messageSent", true);
+            request.getSession().removeAttribute("messageSent");
+        }
+		
+    	request.getRequestDispatcher("/WEB-INF/jsp/contact.jsp").forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+        String utilisateur = request.getParameter("utilisateur");
+        String message = request.getParameter("message");
+        String idRestaurant = request.getParameter("idRestaurant");
+        
+        System.out.println("Message reçu de " + utilisateur);
+        System.out.println("Message: " + message);
+        System.out.println("Pour le restaurant ID: " + idRestaurant);
+        
+        boolean messageEnvoye = true;
+        
+        if (messageEnvoye) {
+            request.getSession().setAttribute("messageSent", true);
+        }
+        
+        response.sendRedirect("contact?id=" + idRestaurant);
 	}
-
 }

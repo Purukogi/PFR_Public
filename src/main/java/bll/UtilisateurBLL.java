@@ -30,6 +30,10 @@ public class UtilisateurBLL {
 		return dao.selectById(id);
 	}
 	
+	public Utilisateur selectByToken(String token) {
+		return dao.selectByToken(token);
+	}
+	
 	public Utilisateur selectByLogin(String login) {
 		return dao.selectByLogin(login);
 	}
@@ -129,7 +133,7 @@ public class UtilisateurBLL {
 	    secureRandom.nextBytes(randomBytes);
 	    String token = base64Encoder.encodeToString(randomBytes);
 	    client.setToken(token);
-	    dao.updateToken(client);
+	    dao.update(client);
 		return token;
 	}
 

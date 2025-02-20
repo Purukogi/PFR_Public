@@ -26,6 +26,18 @@ public class UtilisateurDAO {
 		return resultat;
 	}
 	
+	public Utilisateur selectByToken(String token) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByToken", Utilisateur.class);
+		
+		try {
+			query.setParameter("token", token);
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+	
 	public Utilisateur selectByLogin(String login) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByLogin", Utilisateur.class);
@@ -116,19 +128,6 @@ public class UtilisateurDAO {
 		}
 		
 		em.close();
-	}
-	
-	public void updateToken(Utilisateur client) {
-		
-		EntityManager em = emf.createEntityManager();
-		TypedQuery<Utilisateur> query = em.createNamedQuery("updateToken", Utilisateur.class);
-		
-		query.setParameter("token", client.getToken())
-			 .setParameter("id", client.getId())
-			 .getSingleResult();
-		
-		query.executeUpdate();
-		
 	}
 	
 }
