@@ -147,6 +147,12 @@ ul {
 	color: #009970;
 }
 
+img.restaurant-image {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
 .titrereservation {
 	text-align: center;
     font-family: "neulis-cursive", sans-serif;
