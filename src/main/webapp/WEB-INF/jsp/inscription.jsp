@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,24 +17,28 @@
 <body>
 	<%@include file="fragments/header.jspf" %>
 	<main>	
-		<div class="container vh-100 d-flex align-items-center justify-content-center">
+		<div class="container d-flex align-items-center justify-content-center formulaire_utilisateur">
 	        <div class="card p-4 bg-light shadow-lg">
 	            <div class="card-body">
 	                <h1 class="titreformulaire text-center display-6">Inscription</h1>
 	                <div>
-						<div class="alert alert-danger">
-							${erreur_msp }
-						</div>
-						<div class="alert alert-danger">
+	                	<c:if test="${!empty erreur_mdp }">
+	                		<div class="alert alert-danger">
+								${erreur_mdp }
+							</div>
+	                	</c:if>
+	                	<c:if test="${!empty erreurs_inscription }">
+	                		<div class="alert alert-danger">
 							<ul>
 								<c:forEach var="message" items="${erreurs_inscription }">
 									<li>${message }</li>
 								</c:forEach>
 							</ul>
-						</div>
+							</div>
+	                	</c:if>						
 					</div>
 	                <form action="inscription" method="POST">
-	                	<div class="container d-flex">
+	                	<div class="container d-flex gap-3">
 							<div id="inscription_col1">
 								<div>
 									<label for="identifiant">Identifiant :</label>
