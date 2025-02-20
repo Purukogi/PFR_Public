@@ -1,6 +1,7 @@
 package bo;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity @Table(name = "cartes")
 public class Carte {
@@ -26,6 +28,9 @@ public class Carte {
 			inverseJoinColumns = {@JoinColumn(name = "id_plat")}
 	)
 	private List<Plat> plats;
+	
+    @Transient  
+    private Map<Categorie, List<Plat>> platsGroupedByCategory;
 
 	public Carte(int id, String nom, String description, List<Plat> plats) {
 		this.id = id;
@@ -73,6 +78,15 @@ public class Carte {
 	public void setPlats(List<Plat> plats) {
 		this.plats = plats;
 	}
+
+	
+    public Map<Categorie, List<Plat>> getPlatsGroupedByCategory() {
+        return platsGroupedByCategory;
+    }
+
+    public void setPlatsGroupedByCategory(Map<Categorie, List<Plat>> platsGroupedByCategory) {
+        this.platsGroupedByCategory = platsGroupedByCategory;
+    }
 	
 	
 	

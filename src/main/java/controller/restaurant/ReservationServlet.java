@@ -1,41 +1,62 @@
 package controller.restaurant;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import bll.ReservationBLL;
+import bll.RestaurantBLL;
+import bll.UtilisateurBLL;
+import bo.Restaurant;
+import bo.TableRestaurant;
+import bo.Utilisateur;
+import exceptions.ReservationException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * Servlet implementation class ReservationServlet
  */
-@WebServlet("/ReservationServlet")
+@WebServlet("/reservation")
 public class ReservationServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ReservationServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+    private static final long serialVersionUID = 1L;
+    private ReservationBLL bll = new ReservationBLL();
+    private RestaurantBLL restaurantBLL = new RestaurantBLL();
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.valueOf(request.getParameter("id"));
+    	
+		Restaurant restaurant = restaurantBLL.selectById(id);
+		request.setAttribute("restaurant", restaurant);
+    	request.getRequestDispatcher("/WEB-INF/jsp/reservation.jsp").forward(request, response);
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
+        
+        LocalDate date = LocalDate.parse(request.getParameter("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String horaire = request.getParameter("horaire");
+        int nombrePersonnes = Integer.parseInt(request.getParameter("nombre"));
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+        // Conversion en LocalDateTime
+        LocalDateTime dateTimeReservation = LocalDateTime.parse(date + " " + horaire, FORMATTER);
 
+        Restaurant restaurant = restaurantBLL.selectById(1);
+        TableRestaurant table = null;
+        
+
+        try {
+            bll.insert(restaurant, utilisateur, table, dateTimeReservation, nombrePersonnes, "en attente");
+            response.sendRedirect("accueil");
+        } catch (NumberFormatException | DateTimeParseException | ReservationException e) {
+            request.setAttribute("erreur", "Données invalides. Veuillez réessayer.");
+            request.getRequestDispatcher("/WEB-INF/jsp/reservation.jsp").forward(request, response);
+        }
+    }
 }

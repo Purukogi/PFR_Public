@@ -4,6 +4,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.Arrays;
+import java.util.Base64;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -17,11 +19,60 @@ public class UtilisateurBLL {
 	
 	private UtilisateurDAO dao;
 	
+	private static final SecureRandom secureRandom = new SecureRandom(); //threadsafe
+	private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
+	
 	public UtilisateurBLL() {
 		dao = new UtilisateurDAO();
 	}
 	
+	public Utilisateur selectById(int id) {
+		return dao.selectById(id);
+	}
+	
+	public Utilisateur selectByLogin(String login) {
+		return dao.selectByLogin(login);
+	}
+	
+	public Utilisateur selectByEmail(String email) {
+		return dao.selectByEmail(email);
+	}
+	
+	public Utilisateur selectByEmailEtMdp(String email, String mdp) {
+		
+		Utilisateur client = selectByEmail(email);
+		
+		if (client != null) {
+			byte[] hashedMdp = hashMdp(mdp, client.getSalt());
+			if (Arrays.equals(hashedMdp, client.getMdp())) {
+				return client;
+			} else {
+				return null;
+			}
+		}
+		
+		return client;
+	}
+	
+	public Utilisateur selectByLoginEtMdp(String login, String mdp) {
+		
+		Utilisateur client = selectByLogin(login);
+		
+		if (client != null) {
+			byte[] hashedMdp = hashMdp(mdp, client.getSalt());
+			if (Arrays.equals(hashedMdp, client.getMdp())) {
+				return client;
+			} else {
+				return null;
+			}
+		}
+		
+		return client;
+	}
+	
+
 	public void insert(String nom, String prenom, String identifiant, String mdp, String telephone, String email ) throws UtilisateurException {
+
 				
 		Utilisateur client = new Utilisateur();
 		client.setNom(nom);
@@ -41,6 +92,16 @@ public class UtilisateurBLL {
 		
 	}
 	
+	public void delete(Utilisateur client) {
+		dao.delete(client);
+	}
+	
+	public void update(Utilisateur client) throws UtilisateurException {
+		checkUtilisateur(client);
+		
+		dao.update(client);
+	}
+	
 	private void generateSalt(Utilisateur client) {
 		
 		SecureRandom random = new SecureRandom();
@@ -49,7 +110,7 @@ public class UtilisateurBLL {
 		client.setSalt(salt);
 	}
 	
-	private byte[] hashMdp(String mdp, byte[] salt) {
+	public byte[] hashMdp(String mdp, byte[] salt) {
 		
 		KeySpec spec = new PBEKeySpec(mdp.toCharArray(), salt, 65536, 128);
 		try {
@@ -62,6 +123,16 @@ public class UtilisateurBLL {
 		return null;
 	}
 	
+
+	public String generateToken(Utilisateur client) {
+		byte[] randomBytes = new byte[24];
+	    secureRandom.nextBytes(randomBytes);
+	    String token = base64Encoder.encodeToString(randomBytes);
+	    client.setToken(token);
+	    dao.updateToken(client);
+		return token;
+	}
+
 	public void checkUtilisateur(Utilisateur client) throws UtilisateurException {
 		
 		UtilisateurException exception = new UtilisateurException();
@@ -103,5 +174,5 @@ public class UtilisateurBLL {
 		}
 		
 	}
-	
+
 }

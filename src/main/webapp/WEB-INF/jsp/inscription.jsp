@@ -21,7 +21,7 @@
 	        <div class="card p-4 bg-light shadow-lg">
 	            <div class="card-body">
 	                <h1 class="titreformulaire text-center display-6">Inscription</h1>
-	                <div >
+	                <div>
 						<div class="alert alert-danger">
 							${erreur_msp }
 						</div>

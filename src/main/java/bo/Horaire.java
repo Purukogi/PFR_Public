@@ -1,6 +1,6 @@
 package bo;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,17 +18,17 @@ public class Horaire {
 	@Column(length = 8)
 	private String jour;
 	
-	private LocalDateTime ouverture;
-	private LocalDateTime fermeture;
+	private LocalTime ouverture;
+	private LocalTime fermeture;
 	
-	public Horaire(int id, String jour, LocalDateTime ouverture, LocalDateTime fermeture) {
+	public Horaire(int id, String jour, LocalTime ouverture, LocalTime fermeture) {
 		this.id = id;
 		this.jour = jour;
 		this.ouverture = ouverture;
 		this.fermeture = fermeture;
 	}
 	
-	public Horaire(String jour, LocalDateTime ouverture, LocalDateTime fermeture) {
+	public Horaire(String jour, LocalTime ouverture, LocalTime fermeture) {
 		this.jour = jour;
 		this.ouverture = ouverture;
 		this.fermeture = fermeture;
@@ -52,19 +52,19 @@ public class Horaire {
 		this.jour = jour;
 	}
 
-	public LocalDateTime getOuverture() {
+	public LocalTime getOuverture() {
 		return ouverture;
 	}
 
-	public void setOuverture(LocalDateTime ouverture) {
+	public void setOuverture(LocalTime ouverture) {
 		this.ouverture = ouverture;
 	}
 
-	public LocalDateTime getFermeture() {
+	public LocalTime getFermeture() {
 		return fermeture;
 	}
 
-	public void setFermeture(LocalDateTime fermeture) {
+	public void setFermeture(LocalTime fermeture) {
 		this.fermeture = fermeture;
 	}
 	

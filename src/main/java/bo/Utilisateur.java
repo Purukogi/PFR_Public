@@ -6,10 +6,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="utilisateurs")
+
+@NamedQueries({
+	@NamedQuery (name = "selectByLogin",
+			 	 query="SELECT u FROM Utilisateur u WHERE u.login= :login"),
+	@NamedQuery (name = "selectByEmail",
+	 			 query="SELECT u FROM Utilisateur u WHERE u.email= :email"),
+	@NamedQuery (name = "selectByEmailEtMdp",
+				 query="SELECT u FROM Utilisateur u WHERE u.email= :email AND u.mdp= :mdp"),
+	@NamedQuery (name = "selectByLoginEtMdp",
+	 			 query="SELECT u FROM Utilisateur u WHERE u.login= :login AND u.mdp= :mdp")
+})
+
 public class Utilisateur {
 	
 	@Id
@@ -123,4 +137,10 @@ public class Utilisateur {
 		this.restaurant = restaurant;
 	}
 
+	@Override
+	public String toString() {
+		return "Utilisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", telephone="
+				+ telephone + ", email=" + email + ", role=" + role + "]";
+	}	
+	
 }

@@ -41,7 +41,7 @@ public class InscriptionServlet extends HttpServlet {
 		
 		if(!mdp.equals(mdpConfirm)) {
 			
-			request.setAttribute("erreurs_inscription", "Les champs de mot de passe ne correspondent pas !");
+			request.setAttribute("erreur_mdp", "Les champs de mot de passe ne correspondent pas !");
 			request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp").forward(request, response);
 			
 		}else {			
@@ -50,10 +50,10 @@ public class InscriptionServlet extends HttpServlet {
 			
 			try {
 				bll.insert(nom, prenom, identifiant, mdp, telephone, email);
-				response.sendRedirect("Connexion");
+				response.sendRedirect("connexion");
 				
 			} catch (UtilisateurException e) {
-				request.setAttribute("erreurs_inscription", e.getMessages());
+				request.setAttribute("erreurs_modification", e.getMessages());
 				request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp").forward(request, response);
 			}
 			
