@@ -18,7 +18,7 @@ import bo.Utilisateur;
 /**
  * Servlet Filter implementation class ConnexionFilter
  */
-/* @WebFilter(
+@WebFilter(
 		dispatcherTypes = DispatcherType.REQUEST,
 		urlPatterns = {"/contact", "/reservation", "/profil", "/modification-profil"}
 )
@@ -38,4 +38,3 @@ public class ConnexionFilter extends HttpFilter implements Filter {
 		httpResponse.sendRedirect("connexion");
 	}
 }
-*/
