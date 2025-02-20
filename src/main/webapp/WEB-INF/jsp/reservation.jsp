@@ -20,10 +20,10 @@
 	    <div class="container vh-100 d-flex align-items-center justify-content-center">
 	        <div class="card p-4 bg-light shadow-lg">
 	            <div class="card-body">
-	                <h1 class="text-center mb-4">Réservation au ${restaurant.nom}</h1>
+	                <h1 class="titreformulaire text-center display-6">Formulaire de réservation</h1>
+	                <h2 class="titrereservation text-center">${restaurant.nom}</h2>
 	                <form action="reservation" method="post">
 	                    <input type="hidden" name="idRestaurant" id="idRestaurant" value="${restaurant.id}">
-						<input type="hidden" name="idUtilisateur" id="idUtilisateur" value="${sessionScope.utilisateur.id }">
 	                    <div class="mb-3">
 	                        <label for="date" class="form-label">Date :</label>
 	                        <input type="date" name="date" id="date" class="form-control" required>

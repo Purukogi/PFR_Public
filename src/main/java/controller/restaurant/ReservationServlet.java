@@ -30,12 +30,16 @@ public class ReservationServlet extends HttpServlet {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/jsp/reservation.jsp").forward(request, response);
+		int id = Integer.valueOf(request.getParameter("id"));
+    	
+		Restaurant restaurant = restaurantBLL.selectById(id);
+		request.setAttribute("restaurant", restaurant);
+    	request.getRequestDispatcher("/WEB-INF/jsp/reservation.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
-
+        
         LocalDate date = LocalDate.parse(request.getParameter("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String horaire = request.getParameter("horaire");
         int nombrePersonnes = Integer.parseInt(request.getParameter("nombre"));

@@ -37,7 +37,10 @@
 			</div>
 		</div>
 	</div>	
-    
+    <form action="reservation" method="GET" class="mb-3">
+		<input type="hidden" name="id" value="${restaurant.id}">
+		<input type="submit" value="Réserver" class="btn btn-primary">
+	</form>
 	<div class="row justify-content-center col-xl-8 col-md-12 text-center border border-2 rounded align-items-center pt-4 pb-4">
 		<h4>En ce moment : <b>${restaurant.carte.nom}</b></h4>	
 		<p>${restaurant.carte.description}</p>
