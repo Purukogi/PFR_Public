@@ -30,20 +30,40 @@ public class UtilisateurBLL {
 		return dao.selectByLogin(login);
 	}
 	
+	public Utilisateur selectByEmail(String email) {
+		return dao.selectByEmail(email);
+	}
+	
 	public Utilisateur selectByEmailEtMdp(String email, String mdp) {
-		//check if exists
-		return dao.selectByEmailEtMdp(email, mdp);
+		
+		Utilisateur client = selectByEmail(email);
+		
+		if (client != null) {
+			byte[] hashedMdp = hashMdp(mdp, client.getSalt());
+			if (Arrays.equals(hashedMdp, client.getMdp())) {
+				return client;
+			} else {
+				return null;
+			}
+		}
+		
+		return client;
 	}
 	
 	public Utilisateur selectByLoginEtMdp(String login, String mdp) {
-		//check if exists
+		
 		Utilisateur client = selectByLogin(login);
-		byte[] hashedMdp = hashMdp(mdp, client.getSalt());
-		if (Arrays.equals(hashedMdp, client.getMdp())) {
-			return client;
-		} else {
-			return null;
+		
+		if (client != null) {
+			byte[] hashedMdp = hashMdp(mdp, client.getSalt());
+			if (Arrays.equals(hashedMdp, client.getMdp())) {
+				return client;
+			} else {
+				return null;
+			}
 		}
+		
+		return client;
 	}
 	
 

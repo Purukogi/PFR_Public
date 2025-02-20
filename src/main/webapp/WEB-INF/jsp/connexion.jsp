@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,11 @@
 	<main>
 		<div id="formulaire_connexion">
 			<form action="connexion" method="POST" >
+				<c:if test="${!empty erreur_login }">
+					<div class="alert alert-danger">
+						${erreur_login }
+					</div>
+				</c:if>	
 				<div>
 					<label for="identifiant">Identifiant :</label>
 					<input type="text" name="identifiant" id="identifiant" placeholder="Email ou login" class="form-control">
@@ -25,17 +31,18 @@
 				<div>
 					<label for="mdp">Mot de passe :</label>
 					<input type="password" name="mdp" id="mdp" class="form-control">
-				</div>
+				</div>				
 				<div>
 					<label for="souvenir">Se souvenir de moi ?</label>
 					<input type="checkbox" name="souvenir" id="souvenir">
 				</div>
-				<div>
+				<div>					
 					<input type="submit" value="Se connecter" class="btn btn-primary d-none d-lg-block">
 					Pas encore inscrit ? <a href="inscription">Rejoignez-nous !</a>
 				</div>				
-			</form>			
-		</div>		
+			</form>		
+		</div>
+				
 	</main>
 	<%@include file="fragments/footer.jspf" %>
 </body>

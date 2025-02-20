@@ -25,14 +25,16 @@ public class ConnexionServlet extends HttpServlet {
 		String souvenir = request.getParameter("souvenir");
 		String identifiant = request.getParameter("identifiant");
 		String mdp = request.getParameter("mdp");
-		Utilisateur client = new Utilisateur();
+		Utilisateur client = null;
 		UtilisateurBLL bll = new UtilisateurBLL();
 		
 		if (identifiant.contains("@")) {
 			client = bll.selectByEmailEtMdp(identifiant, mdp);
-		} else {
+		} 
+
+		if (client == null) {
 			client = bll.selectByLoginEtMdp(identifiant, mdp);
-		}		
+		}
 		
 		if (client == null) {
 			request.setAttribute("erreur_login", "Identifiant ou mot de passe incorrect !");
@@ -45,6 +47,7 @@ public class ConnexionServlet extends HttpServlet {
 				response.addCookie(cookie);
 			}
 			request.getSession().setAttribute("utilisateur", client);
+			System.out.println(client.toString());
 			response.sendRedirect("accueil");
 		}
 		
