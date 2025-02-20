@@ -22,8 +22,8 @@
 	
     <div class="container col-xl-8 col-md-12 d-flex flex-column align-items-center justify-content-center mb-4">
 		<div class="row border border-2 rounded align-items-center text-center">
-			<div class="col-md-6 m-0 p-0 ">
-				<img src="${restaurant.url_image}" alt="Image de ${restaurant.nom}" class="img-fluid" >
+			<div class="col-md-6 m-0 p-0 " >
+				<img src="${restaurant.url_image}" alt="Image de ${restaurant.nom}" class="img-fluid restaurant-image" style="max-height: 400px;" >
 			</div>
 			<div class="col-md-6 pb-3 ">
 				<h3 class="mb-3 mt-3">Horaires d'ouverture :</h3>
@@ -37,7 +37,10 @@
 			</div>
 		</div>
 	</div>	
-    
+    <form action="reservation" method="GET" class="mb-3">
+		<input type="hidden" name="id" value="${restaurant.id}">
+		<input type="submit" value="Réserver" class="btn btn-primary">
+	</form>
 	<div class="row justify-content-center col-xl-8 col-md-12 text-center border border-2 rounded align-items-center pt-4 pb-4">
 		<h4>En ce moment : <b>${restaurant.carte.nom}</b></h4>	
 		<p>${restaurant.carte.description}</p>

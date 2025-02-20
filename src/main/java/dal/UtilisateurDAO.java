@@ -19,6 +19,13 @@ public class UtilisateurDAO {
 		emf = Persistence.createEntityManagerFactory("SQLServer");
 	}
 	
+	public Utilisateur selectById(int id) {
+		EntityManager em = emf.createEntityManager();
+		Utilisateur resultat = em.find(Utilisateur.class, id);
+		em.close();
+		return resultat;
+	}
+	
 	public Utilisateur selectByLogin(String login) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Utilisateur> query = em.createNamedQuery("selectByLogin", Utilisateur.class);
