@@ -22,28 +22,37 @@ public class ModificationProfilServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UtilisateurBLL bll = new UtilisateurBLL();		
-		Utilisateur client = (Utilisateur) request.getSession().getAttribute("utilisateur");
-		String mdpToCheck = request.getParameter("mdp");
-		byte[] hashedMdpToCheck = bll.hashMdp(mdpToCheck, client.getSalt());
 		
-		if(Arrays.equals(client.getMdp(), hashedMdpToCheck)) {
-			client.setPrenom(request.getParameter("prenom"));
-			client.setNom(request.getParameter("nom"));
-			client.setEmail(request.getParameter("email"));
-			client.setTelephone(request.getParameter("telephone"));
-			client.setLogin(request.getParameter("identifiant"));
-			
+		Utilisateur clientSession = (Utilisateur) request.getSession().getAttribute("utilisateur");
+		String mdpToCheck = request.getParameter("mdp");
+		byte[] hashedMdpToCheck = bll.hashMdp(mdpToCheck, clientSession.getSalt());
+		
+		if(Arrays.equals(clientSession.getMdp(), hashedMdpToCheck)) {			
 			try {
-				bll.update(client);
+				Utilisateur clientToCheck = new Utilisateur();
+				clientToCheck.setPrenom(request.getParameter("prenom"));
+				clientToCheck.setNom(request.getParameter("nom"));
+				clientToCheck.setEmail(request.getParameter("email"));
+				clientToCheck.setTelephone(request.getParameter("telephone"));
+				clientToCheck.setLogin(request.getParameter("identifiant"));
+				bll.checkUtilisateur(clientToCheck);
+				
+				clientSession.setNom(clientToCheck.getNom());
+				clientSession.setPrenom(clientToCheck.getPrenom());
+				clientSession.setEmail(clientToCheck.getEmail());
+				clientSession.setTelephone(clientToCheck.getTelephone());
+				clientSession.setLogin(clientToCheck.getLogin());
+				bll.update(clientSession);
+				
 				response.sendRedirect("profil");
 			} catch (UtilisateurException e) {
 				request.setAttribute("erreurs_modification", e.getMessages());
-				request.getRequestDispatcher("/WEB-INF/jsp/modification.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/jsp/modification_profil.jsp").forward(request, response);
 			}
 			
 		} else {
 			request.setAttribute("erreur_mdp", "Mot de passe incorrect !");
-			request.getRequestDispatcher("/WEB-INF/jsp/modification.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/modification_profil.jsp").forward(request, response);
 		}
 		
 		

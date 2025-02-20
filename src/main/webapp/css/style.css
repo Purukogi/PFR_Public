@@ -120,7 +120,7 @@ h2 {
 	align-items: center;
 }
 
-#formulaire_inscription_contenu, #formulaire_profil_contenu {
+#formulaire_inscription_contenu, #formulaire_profil_contenu, #formulaire_modification_contenu {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	column-gap: 20px;

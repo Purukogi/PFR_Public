@@ -19,9 +19,25 @@
 	<main>
 		<div id="formulaire_modif_profil">
 			<form action="modification" method="POST">
-			<div >
 			
-			<fieldset id="formulaire_profil_contenu">
+			<div >
+			<c:if test="${!empty erreur_mdp}">
+				<div id="erreur_mdp" class="alert alert-danger">
+					${erreur_mdp }
+				</div>
+			</c:if>
+			<c:if test="${!empty erreurs_modification }">
+				<div id="erreurs_modification" class="alert alert-danger">
+				<ul>
+					<c:forEach var="message" items="${erreurs_modification }">
+						<li>${message }</li>
+					</c:forEach>
+				</ul>
+				</div>
+			</c:if>			
+			</div>
+			
+			<div id="formulaire_modification_contenu">			
 				<div id="profil_col1">
 					<div>
 						<label for="prenom">Prénom :</label>
@@ -45,9 +61,7 @@
 						<label for="identifiant">Identifiant :</label>
 						<input type="text" name="identifiant" id="identifiant" placeholder="Identifiant" value="${sessionScope.utilisateur.login }" class="form-control">
 					</div>			
-				</div>	
-			</fieldset>
-							
+				</div>							
 			</div>
 			<div>
 				<label for="mdp">Entrez votre mot de passe pour confirmer :</label>
