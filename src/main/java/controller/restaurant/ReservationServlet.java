@@ -8,7 +8,9 @@ import java.time.format.DateTimeParseException;
 
 import bll.ReservationBLL;
 import bll.RestaurantBLL;
+import bll.UtilisateurBLL;
 import bo.Restaurant;
+import bo.TableRestaurant;
 import bo.Utilisateur;
 import exceptions.ReservationException;
 import jakarta.servlet.ServletException;
@@ -16,7 +18,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ReservationServlet
@@ -33,28 +34,21 @@ public class ReservationServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
 
-        if (utilisateur == null) {
-            response.sendRedirect("connexion.jsp");
-            return;
-        }
+        LocalDate date = LocalDate.parse(request.getParameter("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String horaire = request.getParameter("horaire");
+        int nombrePersonnes = Integer.parseInt(request.getParameter("nombre"));
+
+        // Conversion en LocalDateTime
+        LocalDateTime dateTimeReservation = LocalDateTime.parse(date + " " + horaire, FORMATTER);
+
+        Restaurant restaurant = restaurantBLL.selectById(1);
+        TableRestaurant table = null;
+        
 
         try {
-            int idRestaurant = Integer.parseInt(request.getParameter("idRestaurant"));
-            LocalDate date = LocalDate.parse(request.getParameter("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            String horaire = request.getParameter("horaire");
-            int nombrePersonnes = Integer.parseInt(request.getParameter("nombre"));
-
-            // Conversion en LocalDateTime
-            LocalDateTime dateTimeReservation = LocalDateTime.parse(date + " " + horaire, FORMATTER);
-
-            Restaurant restaurant = restaurantBLL.selectById(idRestaurant);
-
-            // Insertion de la réservation
-            bll.insert(restaurant, utilisateur, dateTimeReservation, nombrePersonnes, "en attente");
-
+            bll.insert(restaurant, utilisateur, table, dateTimeReservation, nombrePersonnes, "en attente");
             response.sendRedirect("accueil");
         } catch (NumberFormatException | DateTimeParseException | ReservationException e) {
             request.setAttribute("erreur", "Données invalides. Veuillez réessayer.");

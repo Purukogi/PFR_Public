@@ -5,6 +5,7 @@ import java.util.List;
 
 import bo.Reservation;
 import bo.Restaurant;
+import bo.TableRestaurant;
 import bo.Utilisateur;
 import dal.ReservationDAO;
 import exceptions.ReservationException;
@@ -24,11 +25,12 @@ public class ReservationBLL {
 		return dao.selectByUtilisateur(idUtilisateur);
 	}
 	
-	public void insert(Restaurant restaurant, Utilisateur utilisateur, LocalDateTime horaireReservation, int nbPersonne,
+	public void insert(Restaurant restaurant, Utilisateur utilisateur, TableRestaurant table, LocalDateTime horaireReservation, int nbPersonne,
 			String statut) throws ReservationException {
 		Reservation reservation = new Reservation();
 		reservation.setRestaurant(restaurant);
 		reservation.setUtilisateur(utilisateur);
+		reservation.setTable(table);
 		reservation.setHoraireReservation(horaireReservation);
 		reservation.setNbPersonne(nbPersonne);
 		reservation.setStatut("En attente");

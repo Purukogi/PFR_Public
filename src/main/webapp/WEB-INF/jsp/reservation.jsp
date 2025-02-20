@@ -23,7 +23,7 @@
 	                <h1 class="text-center mb-4">Réservation au ${restaurant.nom}</h1>
 	                <form action="reservation" method="post">
 	                    <input type="hidden" name="idRestaurant" id="idRestaurant" value="${restaurant.id}">
-	
+						<input type="hidden" name="idUtilisateur" id="idUtilisateur" value="${sessionScope.utilisateur.id }">
 	                    <div class="mb-3">
 	                        <label for="date" class="form-label">Date :</label>
 	                        <input type="date" name="date" id="date" class="form-control" required>

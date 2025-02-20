@@ -26,6 +26,10 @@ public class UtilisateurBLL {
 		dao = new UtilisateurDAO();
 	}
 	
+	public Utilisateur selectById(int id) {
+		return dao.selectById(id);
+	}
+	
 	public Utilisateur selectByLogin(String login) {
 		return dao.selectByLogin(login);
 	}
@@ -160,5 +164,4 @@ public class UtilisateurBLL {
 		}
 		
 	}
-	
 }

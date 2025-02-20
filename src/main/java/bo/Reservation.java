@@ -31,6 +31,10 @@ public class Reservation {
 	@JoinColumn(name = "id_utilisateur")
 	private Utilisateur utilisateur;
 	
+    @ManyToOne
+    @JoinColumn(name = "id_table", nullable = true)
+	private TableRestaurant table;
+
 	@Column(name = "horaire_reservation")
 	private LocalDateTime horaireReservation;
 	
@@ -65,6 +69,14 @@ public class Reservation {
 		this.utilisateur = utilisateur;
 	}
 
+	public TableRestaurant getTable() {
+		return table;
+	}
+
+	public void setTable(TableRestaurant table) {
+		this.table = table;
+	}
+	
 	public LocalDateTime getHoraireReservation() {
 		return horaireReservation;
 	}
