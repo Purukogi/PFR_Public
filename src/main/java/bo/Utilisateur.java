@@ -14,6 +14,8 @@ import javax.persistence.Table;
 @Table(name="utilisateurs")
 
 @NamedQueries({
+	@NamedQuery (name = "selectByToken",
+		 	 	 query="SELECT u FROM Utilisateur u WHERE u.token= :token"),
 	@NamedQuery (name = "selectByLogin",
 			 	 query="SELECT u FROM Utilisateur u WHERE u.login= :login"),
 	@NamedQuery (name = "selectByEmail",
