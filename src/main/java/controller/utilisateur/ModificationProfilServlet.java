@@ -7,9 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Servlet implementation class ModificationProfilServlet
- */
+import bll.UtilisateurBLL;
+import bo.Utilisateur;
+import exceptions.UtilisateurException;
+
 @WebServlet("/modification")
 public class ModificationProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,8 +20,25 @@ public class ModificationProfilServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		UtilisateurBLL bll = new UtilisateurBLL();
+		
+		Utilisateur client = (Utilisateur) request.getSession().getAttribute("utilisateur");
+		client.setPrenom(request.getParameter("prenom"));
+		client.setNom(request.getParameter("nom"));
+		client.setEmail(request.getParameter("email"));
+		client.setTelephone(request.getParameter("telephone"));
+		client.setLogin(request.getParameter("identifiant"));
+		
+		
+		
+		try {
+			bll.update(client);
+			response.sendRedirect("profil");
+		} catch (UtilisateurException e) {
+			request.setAttribute("erreurs_modification", e.getMessages());
+			request.getRequestDispatcher("/WEB-INF/jsp/modification.jsp").forward(request, response);
+		}
+		
 	}
 
 }

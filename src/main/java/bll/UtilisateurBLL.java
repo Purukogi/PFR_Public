@@ -88,6 +88,16 @@ public class UtilisateurBLL {
 		
 	}
 	
+	public void delete(Utilisateur client) {
+		dao.delete(client);
+	}
+	
+	public void update(Utilisateur client) throws UtilisateurException {
+		checkUtilisateur(client);
+		
+		dao.update(client);
+	}
+	
 	private void generateSalt(Utilisateur client) {
 		
 		SecureRandom random = new SecureRandom();
@@ -160,5 +170,6 @@ public class UtilisateurBLL {
 		}
 		
 	}
+	
 	
 }

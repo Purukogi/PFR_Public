@@ -49,7 +49,10 @@
 			</fieldset>
 							
 			</div>
-			
+			<div>
+				<label for="mdp">Entrez votre mot de passe pour confirmer :</label>
+				<input type="password" name="mdp" id="mdp" class="form-control">
+			</div>
 			<div id="inscription_bouton">				
 				<input type="submit" value="Modifier" class="btn btn-primary">
 			</div>

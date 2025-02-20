@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<script type="text/javascript" src="scripts/script_suppression.js" defer></script>
 </head>
 <body>
 	<%@include file="fragments/header.jspf" %>
@@ -47,8 +48,8 @@
 			</div>
 			<div id="inscription_bouton">				
 				<input type="submit" value="Modifier" class="btn btn-primary">
-				<button type="button" class="btn btn-warning">Déconnexion</button>
-				<button type="button" class="btn btn-danger">Supprimer</button>
+				<a href="deconnexion"><button type="button" class="btn btn-warning">Déconnexion</button></a>
+				<button type="button" class="btn btn-danger" id="bouton_suppression">Supprimer</button>
 			</div>
 			</form>
 		</div>
