@@ -19,7 +19,7 @@
     <main>
         <section class="hero-section d-flex align-items-end">
             <div class="container mb-3 ms-5">
-                <h1 class="text-white">
+                <h1 id="titre" class="text-white">
                     Découvrez nos restaurants
                 </h1>
             </div>
