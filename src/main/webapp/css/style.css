@@ -111,24 +111,3 @@ h2 {
 .social-icon:hover {
     color: #095228 !important;
 }
-
-#formulaire_connexion, #formulaire_inscription {
-	width: 100%;
-	height: 80vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-#formulaire_inscription_contenu {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 20px;
-}
-
-#inscription_boutton {
-	margin-top: 15px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
