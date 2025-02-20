@@ -143,5 +143,4 @@ public class Utilisateur {
 				+ telephone + ", email=" + email + ", role=" + role + "]";
 	}	
 	
-
 }
