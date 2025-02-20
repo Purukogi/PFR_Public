@@ -43,5 +43,22 @@ public class ReservationBLL {
 
 	private void checkReservation(Reservation reservation) throws ReservationException{
 
+		ReservationException exception = new ReservationException();
+		
+		if(reservation.getHoraireReservation().isBefore(LocalDateTime.now())) {
+			exception.addMessage("Vous ne pouvez pas réserver pour une date dans le passé");
+		}
+		
+		if(reservation.getNbPersonne() <= 0) {
+			exception.addMessage("Vous devez réserver pour au moins une personne");
+		}
+		
+		if(reservation.getNbPersonne() > 8) {
+			exception.addMessage("Pour toute réservation de plus de 8 personnes, contactez le restaurant par téléphone ou via le formulaire dédié");
+		}
+		
+		if (exception.getMessages().size() > 0) {
+			throw exception;
+		}
 	}
 }

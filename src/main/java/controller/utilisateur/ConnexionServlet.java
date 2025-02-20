@@ -48,7 +48,15 @@ public class ConnexionServlet extends HttpServlet {
 			}
 			request.getSession().setAttribute("utilisateur", client);
 			System.out.println(client.toString());
-			response.sendRedirect("accueil");
+			 
+			String redirectUrl = (String) request.getSession().getAttribute("redirectAfterLogin");
+
+		    if (redirectUrl != null) {
+		    	request.getSession().removeAttribute("redirectAfterLogin"); // Supprimer après utilisation
+		    	response.sendRedirect(redirectUrl);
+		    } else {
+		    	response.sendRedirect("accueil");
+		    }
 		}
 		
 		

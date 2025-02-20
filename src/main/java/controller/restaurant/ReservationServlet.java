@@ -39,7 +39,7 @@ public class ReservationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
-        
+        int idRestaurant = Integer.valueOf(request.getParameter("idRestaurant"));
         LocalDate date = LocalDate.parse(request.getParameter("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String horaire = request.getParameter("horaire");
         int nombrePersonnes = Integer.parseInt(request.getParameter("nombre"));
@@ -47,10 +47,9 @@ public class ReservationServlet extends HttpServlet {
         // Conversion en LocalDateTime
         LocalDateTime dateTimeReservation = LocalDateTime.parse(date + " " + horaire, FORMATTER);
 
-        Restaurant restaurant = restaurantBLL.selectById(1);
+		Restaurant restaurant = restaurantBLL.selectById(idRestaurant);
         TableRestaurant table = null;
         
-
         try {
             bll.insert(restaurant, utilisateur, table, dateTimeReservation, nombrePersonnes, "en attente");
             response.sendRedirect("accueil");

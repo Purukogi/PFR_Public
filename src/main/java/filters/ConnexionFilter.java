@@ -18,7 +18,7 @@ import bo.Utilisateur;
 /**
  * Servlet Filter implementation class ConnexionFilter
  */
-/* @WebFilter(
+@WebFilter(
 		dispatcherTypes = DispatcherType.REQUEST,
 		urlPatterns = {"/contact", "/reservation", "/profil", "/modification-profil"}
 )
@@ -34,8 +34,14 @@ public class ConnexionFilter extends HttpFilter implements Filter {
 			chain.doFilter(httpRequest, httpResponse);
 			return;
 		}
+		
+        String requestedUrl = httpRequest.getRequestURI();
+        String queryString = httpRequest.getQueryString();
+        if (queryString != null) {
+            requestedUrl += "?" + queryString;
+        }
+        httpRequest.getSession().setAttribute("redirectAfterLogin", requestedUrl);
 
 		httpResponse.sendRedirect("connexion");
 	}
 }
-*/
