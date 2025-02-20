@@ -19,14 +19,14 @@
     <section class="taille-navbar container d-flex flex-column align-items-center justify-content-center">
 	<h2 class="mb-5 mt-5">Nos restaurants</h2>
 	
-	<div class="row justify-content-center">
+	<div class="row justify-content-center" >
 	<c:forEach items="${listeRestaurants}" var="r" varStatus="bStatus">
-		<fieldset class="col-lg-8 col-md-12 mb-3 text-center">
-			<div class="row border border-2 rounded align-items-center">
-				<div class="col-md-6 m-0 p-0 ">
-					<img src="${r.url_image}" alt="Image de ${r.nom}" class="img-fluid" >
+		<fieldset class="mb-4 col-lg-8 col-md-12 text-center">
+			<div class="row border border-2 rounded align-items-center" >
+				<div class="col-md-6 m-0 p-0 " style="max-height: 250px; overflow: hidden;">
+					<img src="${r.url_image}" alt="Image de ${r.nom}" class="img-fluid restaurant-image" style="max-height: 250px;">
 				</div>
-				<div class="col-md-6 pt-2 pb-2">
+				<div class="col-md-6 pt-2 pb-2 d-flex flex-column justify-content-between">
 					<h4 >${r.nom}</h4>
 					<p>${r.adresse}</p>
 					<form action="detail-restaurant" method="GET">
