@@ -137,3 +137,14 @@ h2 {
 .taille-navbar {
 	padding-top: 140px;
 }
+
+ul {
+	list-style-type : none;
+	padding: 0;
+	margin: 0;
+}
+
+.vert {
+	color: #009970;
+}
+

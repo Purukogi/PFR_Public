@@ -21,9 +21,7 @@ import javax.persistence.Table;
 	@NamedQuery (name = "selectByEmailEtMdp",
 				 query="SELECT u FROM Utilisateur u WHERE u.email= :email AND u.mdp= :mdp"),
 	@NamedQuery (name = "selectByLoginEtMdp",
-	 			 query="SELECT u FROM Utilisateur u WHERE u.login= :login AND u.mdp= :mdp"),
-	@NamedQuery (name = "updateToken",
-				 query= "UPDATE Utilisateur u SET u.token = :token WHERE u.id = :id")
+	 			 query="SELECT u FROM Utilisateur u WHERE u.login= :login AND u.mdp= :mdp")
 })
 
 public class Utilisateur {
@@ -145,5 +143,4 @@ public class Utilisateur {
 				+ telephone + ", email=" + email + ", role=" + role + "]";
 	}	
 	
-
 }
