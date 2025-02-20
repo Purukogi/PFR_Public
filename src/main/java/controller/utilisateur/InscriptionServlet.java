@@ -53,7 +53,7 @@ public class InscriptionServlet extends HttpServlet {
 				response.sendRedirect("connexion");
 				
 			} catch (UtilisateurException e) {
-				request.setAttribute("erreurs_modification", e.getMessages());
+				request.setAttribute("erreurs_inscription", e.getMessages());
 				request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp").forward(request, response);
 			}
 			
