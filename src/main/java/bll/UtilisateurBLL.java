@@ -92,6 +92,16 @@ public class UtilisateurBLL {
 		
 	}
 	
+	public void delete(Utilisateur client) {
+		dao.delete(client);
+	}
+	
+	public void update(Utilisateur client) throws UtilisateurException {
+		checkUtilisateur(client);
+		
+		dao.update(client);
+	}
+	
 	private void generateSalt(Utilisateur client) {
 		
 		SecureRandom random = new SecureRandom();
@@ -100,7 +110,7 @@ public class UtilisateurBLL {
 		client.setSalt(salt);
 	}
 	
-	private byte[] hashMdp(String mdp, byte[] salt) {
+	public byte[] hashMdp(String mdp, byte[] salt) {
 		
 		KeySpec spec = new PBEKeySpec(mdp.toCharArray(), salt, 65536, 128);
 		try {
@@ -164,4 +174,5 @@ public class UtilisateurBLL {
 		}
 		
 	}
+
 }

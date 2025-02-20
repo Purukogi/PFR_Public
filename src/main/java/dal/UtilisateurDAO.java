@@ -86,6 +86,38 @@ public class UtilisateurDAO {
 		em.close();
 	}
 	
+	public void update(Utilisateur client) {
+		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		try {
+			em.merge(client);
+			em.getTransaction().commit();
+		} catch (EntityExistsException | IllegalArgumentException | TransactionRequiredException e) {
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		}
+		
+		em.close();
+	}
+	
+	public void delete(Utilisateur client) {
+		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		try {
+			em.remove(em.merge(client));
+			em.getTransaction().commit();
+		} catch (EntityExistsException | IllegalArgumentException | TransactionRequiredException e) {
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		}
+		
+		em.close();
+	}
+	
 	public void updateToken(Utilisateur client) {
 		
 		EntityManager em = emf.createEntityManager();
