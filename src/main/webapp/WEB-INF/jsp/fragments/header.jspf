@@ -7,7 +7,7 @@
                     <span class="fw-bold text-wrap fs-4 fs-md-3 fs-lg-2">Pâtes d'or</span>
                 </a>
     
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
     
@@ -16,6 +16,7 @@
                         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
+                    
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                             <li class="nav-item">
@@ -26,22 +27,41 @@
                             </li>
                         </ul>
     					
+    					
+    					<ul>
     					<c:if test="${empty sessionScope.utilisateur }">
+    						<li>
     						<a href="connexion" class="btn btn-primary d-lg-none mt-3 w-100">Se connecter</a>
+    						</li>
     					</c:if>
     					<c:if test="${!empty sessionScope.utilisateur }">
-    						<a href="profil" class="btn btn-primary d-lg-none mt-3 w-100">Mon profil</a>
-    					</c:if> 
-    					                     
+    							<li>
+								<a href="profil" class="btn btn-primary d-lg-none mt-3 mb-1 w-100">Mon profil</a>
+								</li>
+								<li>
+    						<a href="deconnexion" class="d-lg-none mt-3 w-100 vert">Déconnexion</a>
+    						</li>
+    					</c:if>
+    					</ul>                    
                     </div>
                 </div>
-                 					
-    					<c:if test="${empty sessionScope.utilisateur }">
-    						<a href="connexion" class="btn btn-primary d-none d-lg-block ms-auto">Se connecter</a>
-    					</c:if>
-    					<c:if test="${!empty sessionScope.utilisateur }">
-    						<a href="profil" class="btn btn-primary d-none d-lg-block ms-auto">Mon profil</a>
-    					</c:if> 
+                		
+                <ul class="d-flex align-items-center">		
+    			<c:if test="${empty sessionScope.utilisateur }">
+    				<li>
+    					<a href="connexion" class="btn btn-primary d-none d-lg-block ms-3">Se connecter</a>
+    				</li>
+    			</c:if>
+    			
+    			<c:if test="${!empty sessionScope.utilisateur }">
+    				<li>
+    					<a href="profil" class="btn btn-primary d-none d-lg-block ms-3">Mon profil</a>
+    				</li>
+    				<li>
+    					<a href="deconnexion" class="d-none d-lg-block ms-3 vert">Déconnexion</a>
+    				</li>
+    			</c:if> 
+    			</ul>
     					 
             </div>
         </nav>

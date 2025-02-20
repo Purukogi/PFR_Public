@@ -1,5 +1,0 @@
-<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
-<header>
-	<h1>${fn:replace(pageContext.request.contextPath, '/', ' ') } : 2025©</h1>
-	<a href="deconnexion"><button class="deconnexion">Deconnexion</button></a>
-</header>
