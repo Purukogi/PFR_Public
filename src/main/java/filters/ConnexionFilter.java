@@ -1,54 +1,41 @@
 package filters;
 
+import jakarta.servlet.DispatcherType;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+
+import bo.Utilisateur;
 
 /**
  * Servlet Filter implementation class ConnexionFilter
  */
-@WebFilter("/ConnexionFilter")
+/* @WebFilter(
+		dispatcherTypes = DispatcherType.REQUEST,
+		urlPatterns = {"/contact", "/reservation", "/profil", "/modification-profil"}
+)
 public class ConnexionFilter extends HttpFilter implements Filter {
-       
 	private static final long serialVersionUID = 1L;
-
-	/**
-     * @see HttpFilter#HttpFilter()
-     */
-    public ConnexionFilter() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
+	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		
+		Utilisateur utilisateur = (Utilisateur) httpRequest.getSession().getAttribute("utilisateur");
+		if (utilisateur != null) {
+			chain.doFilter(httpRequest, httpResponse);
+			return;
+		}
 
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
+		httpResponse.sendRedirect("connexion");
 	}
-
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
-
 }
+*/
