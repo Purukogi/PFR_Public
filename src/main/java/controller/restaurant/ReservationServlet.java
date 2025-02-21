@@ -33,6 +33,12 @@ public class ReservationServlet extends HttpServlet {
     	
 		Restaurant restaurant = restaurantBLL.selectById(id);
 		request.setAttribute("restaurant", restaurant);
+		
+	    if (request.getSession().getAttribute("reservationSuccess") != null) {
+	    	request.setAttribute("reservationSuccess", true);
+	    	request.getSession().removeAttribute("reservationSuccess");
+	    }
+		
     	request.getRequestDispatcher("/WEB-INF/jsp/reservation.jsp").forward(request, response);
     }
 
@@ -49,9 +55,19 @@ public class ReservationServlet extends HttpServlet {
 		Restaurant restaurant = restaurantBLL.selectById(idRestaurant);
         TableRestaurant table = null;
         
+        
+        
         try {
             bll.insert(restaurant, utilisateur, table, dateTimeReservation, nombrePersonnes, "en attente");
-            response.sendRedirect("accueil");
+        	
+            boolean reservationEnvoyee = true;
+            
+            if (reservationEnvoyee) {
+            	
+            	request.getSession().setAttribute("reservationSuccess", true);
+            }
+            
+            response.sendRedirect("reservation?id=" + idRestaurant);
         } catch (NumberFormatException | DateTimeParseException | ReservationException e) {
             request.setAttribute("erreur", "Données invalides. Veuillez réessayer.");
             request.getRequestDispatcher("/WEB-INF/jsp/reservation.jsp").forward(request, response);
