@@ -33,12 +33,18 @@ public class ReservationServlet extends HttpServlet {
     	
 		Restaurant restaurant = restaurantBLL.selectById(id);
 		request.setAttribute("restaurant", restaurant);
+		
+	    if (request.getSession().getAttribute("reservationSuccess") != null) {
+	    	request.setAttribute("reservationSuccess", true);
+	    	request.getSession().removeAttribute("reservationSuccess");
+	    }
+		
     	request.getRequestDispatcher("/WEB-INF/jsp/reservation.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
-        
+        int idRestaurant = Integer.valueOf(request.getParameter("idRestaurant"));
         LocalDate date = LocalDate.parse(request.getParameter("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String horaire = request.getParameter("horaire");
         int nombrePersonnes = Integer.parseInt(request.getParameter("nombre"));
@@ -46,13 +52,22 @@ public class ReservationServlet extends HttpServlet {
         // Conversion en LocalDateTime
         LocalDateTime dateTimeReservation = LocalDateTime.parse(date + " " + horaire, FORMATTER);
 
-        Restaurant restaurant = restaurantBLL.selectById(1);
+		Restaurant restaurant = restaurantBLL.selectById(idRestaurant);
         TableRestaurant table = null;
         
-
+        
+        
         try {
             bll.insert(restaurant, utilisateur, table, dateTimeReservation, nombrePersonnes, "en attente");
-            response.sendRedirect("accueil");
+        	
+            boolean reservationEnvoyee = true;
+            
+            if (reservationEnvoyee) {
+            	
+            	request.getSession().setAttribute("reservationSuccess", true);
+            }
+            
+            response.sendRedirect("reservation?id=" + idRestaurant);
         } catch (NumberFormatException | DateTimeParseException | ReservationException e) {
             request.setAttribute("erreur", "Données invalides. Veuillez réessayer.");
             request.getRequestDispatcher("/WEB-INF/jsp/reservation.jsp").forward(request, response);

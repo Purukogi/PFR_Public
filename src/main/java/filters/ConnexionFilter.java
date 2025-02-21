@@ -34,7 +34,12 @@ public class ConnexionFilter extends HttpFilter implements Filter {
 			return;
 		}
 		
-		
+        String requestedUrl = httpRequest.getRequestURI();
+        String queryString = httpRequest.getQueryString();
+        if (queryString != null) {
+            requestedUrl += "?" + queryString;
+        }
+        httpRequest.getSession().setAttribute("redirectAfterLogin", requestedUrl);
 
 		httpResponse.sendRedirect("connexion");
 	}

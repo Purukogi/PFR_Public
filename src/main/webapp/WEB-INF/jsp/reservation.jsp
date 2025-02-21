@@ -19,6 +19,7 @@
 	    <div class="container vh-100 d-flex align-items-center justify-content-center">
 	        <div class="card p-4 bg-light shadow-lg">
 	            <div class="card-body">
+	                 <c:if test="${empty reservationSuccess}">
 	                <h1 class="titreformulaire text-center display-6">Formulaire de réservation</h1>
 	                <h2 class="titrereservation text-center">${restaurant.nom}</h2>
 	                <form action="reservation" method="post">
@@ -57,6 +58,16 @@
 	                        <input type="submit" value="Réserver" class="btn btn-primary">
 	                    </div>
 	                </form>
+	                </c:if>
+	                <c:if test="${not empty reservationSuccess}">
+                    <div class="alert alert-success text-center" role="alert">
+                        Votre réservation a bien été prise en compte !<br>
+                        Vous recevrez une confirmation par mail dans les plus brefs délais.
+                    </div>
+                    <div class="text-center">
+                        <a href="accueil" class="btn btn-secondary">Retour à l'accueil</a>
+                    </div>
+				</c:if>
 	            </div>
 	        </div>
 	    </div>
