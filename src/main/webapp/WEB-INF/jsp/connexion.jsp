@@ -34,13 +34,13 @@
 							<label for="mdp">Mot de passe :</label>
 							<input type="password" name="mdp" id="mdp" class="form-control">
 						</div>				
-						<div class="text-center">
+						<div class="text-center mt-2">
 							<label for="souvenir">Se souvenir de moi ?</label>
-							<input type="checkbox" name="souvenir" id="souvenir">
+							<input type="checkbox" name="souvenir" id="souvenir" class="vert">
 						</div>
-						<div>					
-							<input type="submit" value="Se connecter" class="btn btn-primary">
-							Pas encore inscrit ? <a href="inscription">Rejoignez-nous !</a>
+						<div class="container text-center">					
+							<input type="submit" value="Se connecter" class="btn btn-primary mt-2 mb-2">
+							<p>Pas encore inscrit ? <a href="inscription" class="vert">Rejoignez-nous !</a></p>
 						</div>				
 					</form>
 	            </div>

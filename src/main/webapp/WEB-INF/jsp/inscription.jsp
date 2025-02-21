@@ -36,7 +36,7 @@
 							</div>
 	                	</c:if>						
 					</div>
-	                <form action="inscription" method="POST">
+	                <form action="inscription" method="POST" novalidate>
 	                	<div class="container d-flex gap-3">
 							<div id="inscription_col1">
 								<div>
@@ -44,25 +44,25 @@
 									<input type="text" name="identifiant" id="identifiant" placeholder="Identifiant" value="${identifiant }" class="form-control">
 								</div>
 								<div>
-									<label for="email">Email :</label>
-									<input type="text" name="email" id="email" placeholder="Adresse E-Mail" value="${email }" class="form-control"> 
+									<label for="email">Email<span class="vert">*</span> :</label>
+									<input type="email" name="email" id="email" placeholder="Adresse E-Mail" value="${email }" class="form-control"> 
 								</div>
 								<div>
-									<label for="mdp">Mot de passe :</label>
+									<label for="mdp">Mot de passe<span class="vert">*</span> :</label>
 									<input type="password" name="mdp" id="mdp" class="form-control">
 								</div>
 								<div>
-									<label for="mdp_confirmation">Confirmez le mot de passe :</label>
+									<label for="mdp_confirmation">Confirmez le mot de passe<span class="vert">*</span> :</label>
 									<input type="password" name="mdp_confirmation" id="mdp_confirmation" class="form-control">
 								</div>			
 							</div>
 							<div id="inscription_col2">
 								<div>
-									<label for="prenom">Prénom :</label>
+									<label for="prenom">Prénom<span class="vert">*</span> :</label>
 									<input type="text" name="prenom" id="prenom" placeholder="Votre prénom" value="${prenom }" class="form-control">
 								</div>
 								<div>
-									<label for="nom">Nom :</label>
+									<label for="nom">Nom<span class="vert">*</span> :</label>
 									<input type="text" name="nom" id="nom" placeholder="Votre nom" value="${nom }" class="form-control">
 								</div>
 								<div>
@@ -71,8 +71,8 @@
 								</div>					
 							</div>
 						</div>
-						<div>				
-							<input type="submit" value="Envoyer"  class="btn btn-primary d-lg-block mt-3 mx-auto">
+						<div class="container text-center">				
+							<input type="submit" value="Envoyer"  class="btn btn-primary d-lg-block mt-3">
 						</div>
 					</form>
 	            </div>

@@ -40,11 +40,11 @@
 						<div class="container d-flex gap-3">			
 							<div id="profil_col1">
 								<div>
-									<label for="prenom">Prénom :</label>
+									<label for="prenom">Prénom<span class="vert">*</span> :</label>
 									<input type="text" name="prenom" id="prenom" placeholder="Votre prénom" value="${sessionScope.utilisateur.prenom }" class="form-control">
 								</div>
 								<div>
-									<label for="email">Email :</label>
+									<label for="email">Email<span class="vert">*</span> :</label>
 									<input type="text" name="email" id="email" placeholder="Adresse E-Mail" value="${sessionScope.utilisateur.email }" class="form-control"> 
 								</div>
 								<div>
@@ -54,7 +54,7 @@
 							</div>
 							<div id="profil_col2">
 								<div>
-									<label for="nom">Nom :</label>
+									<label for="nom">Nom<span class="vert">*</span> :</label>
 									<input type="text" name="nom" id="nom" placeholder="Votre nom" value="${sessionScope.utilisateur.nom }" class="form-control">
 								</div>
 								<div>
@@ -64,7 +64,7 @@
 							</div>							
 						</div>
 						<div class="container w-75">
-							<label for="mdp">Entrez votre mot de passe pour confirmer :</label>
+							<label for="mdp">Entrez votre mot de passe pour confirmer<span class="vert">*</span> :</label>
 							<input type="password" name="mdp" id="mdp" class="form-control">
 						</div>
 						<div class="text-center">				

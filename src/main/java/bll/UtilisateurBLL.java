@@ -6,6 +6,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.regex.Pattern;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -169,6 +170,10 @@ public class UtilisateurBLL {
 			exception.addMessage("L'e-mail ne peut pas faire plus de 60 caractères !");
 		}
 		
+		if(!checkEmail(client.getEmail())) {
+			exception.addMessage("L'adresse e-mail n'est pas valide !");
+		}
+		
 		if (client.getTelephone().length() > 20) {
 			exception.addMessage("Le numéro de téléphone ne peut pas faire plus de 20 caractères !");
 		}
@@ -177,6 +182,18 @@ public class UtilisateurBLL {
 			throw exception;
 		}
 		
+	}
+	
+	public boolean checkEmail(String email) {
+		//^[A-Za-z0-9_-] begins with a block of any letter, number _ or -
+		//+(\\.[A-Za-z0-9_-]+)* add any number of blocks ".String" (where String contains any letter, number, _ or -)
+		//[^-] can't start after @ with -
+		//[A-Za-z0-9-] first block is any letter, number or -
+		//+(\\.[A-Za-z0-9-]+)* then we add any number of blocks ".String" (where String contains any letter, number or -)
+		//(\\.[A-Za-z]{2,})$ then we end with a bloc ".String" (where String contains any letter and is at least 2 characters long)
+		return Pattern.compile("^[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
+			      .matcher(email)
+			      .matches();
 	}
 
 }
