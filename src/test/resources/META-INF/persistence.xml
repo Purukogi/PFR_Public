@@ -7,7 +7,15 @@
 	
 	<persistence-unit name="SQLServer">
 	
-		<class>bo.Utilisateur bo.Restaurant bo.Carte bo.Categorie bo.Horaire bo.Plat bo.Reservation bo.Role bo.TableRestaurant</class>
+		<class>bo.Carte</class>
+		<class>bo.Horaire</class>
+		<class>bo.Plat</class>
+		<class>bo.Reservation</class>
+		<class>bo.Restaurant</class>
+		<class>bo.Role</class>
+		<class>bo.Utilisateur</class>
+		<class>bo.Categorie</class>
+		<class>bo.TableRestaurant</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />

@@ -1,9 +1,11 @@
 package bll;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Random;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -122,12 +124,7 @@ class UtilisateurBLLTest {
 		assertEquals("L'adresse e-mail n'est pas valide !", e.getMessages().get(2));
 	}
 	
-	/*
-	 * doesn't appear to work
-	 * -> Unable to locate entity descriptor: bo.Utilisateur
-	 * -> No query is registered under the name 'selectByEmail'
-	 */
-	/*
+	
 	@Test
 	void selectById_renvoieUtilisateur() {
 		Random rand = new Random();
@@ -180,7 +177,7 @@ class UtilisateurBLLTest {
 		
 		assertNull(select);
 	}
-	*/
+	
 	
 
 }
