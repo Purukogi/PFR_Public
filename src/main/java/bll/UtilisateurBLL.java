@@ -174,7 +174,7 @@ public class UtilisateurBLL {
 			exception.addMessage("Le numéro de téléphone ne peut pas faire plus de 20 caractères !");
 		}
 
-		if(!checkEmail(client.getEmail())) {
+		if(!(client.getEmail() == null) && !checkEmail(client.getEmail())) {
 			exception.addMessage("L'adresse e-mail n'est pas valide !");
 		}		
 		

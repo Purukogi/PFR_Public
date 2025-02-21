@@ -1,15 +1,14 @@
 package dal;
 
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
-import javax.persistence.TransactionRequiredException;
-import javax.persistence.TypedQuery;
-
 import bo.Utilisateur;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TransactionRequiredException;
+import jakarta.persistence.TypedQuery;
 
 public class UtilisateurDAO {
 

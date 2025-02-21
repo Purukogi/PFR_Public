@@ -2,13 +2,12 @@ package dal;
 
 import java.util.List;
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TransactionRequiredException;
-
 import bo.Reservation;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TransactionRequiredException;
 
 public class ReservationDAO {
 	private EntityManagerFactory emf;
