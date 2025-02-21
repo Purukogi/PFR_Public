@@ -77,12 +77,20 @@
     background: url(../img/authentic-italian-pasta.jpg) no-repeat center;
     background-size: cover;
     width: 100%;
-    height: 100vh;
+    min-height : 100vh;
 }
+
+@media (max-width: 991px) {
+    .hero-section {
+        background-position: right center; /* Ajuste la position pour petits écrans */
+        min-height: 60vh; /* Réduit la hauteur sur petits écrans */
+    }
+}
+
 
 .apropos {
     width: 100%;
-    min-height: 100vh;
+    min-height: 80vh;
     padding: 5rem 2rem;
 }
 
@@ -148,7 +156,6 @@ img.restaurant-image {
     font-family: "Raleway", sans-serif;
     font-weight: 400;
 }
-
 
 input[type=checkbox]{
     accent-color: #009970;
