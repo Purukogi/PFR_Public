@@ -141,35 +141,35 @@ public class UtilisateurBLL {
 		
 		UtilisateurException exception = new UtilisateurException();
 		
-		if (client.getNom().isBlank()) {
+		if (client.getNom() == null || client.getNom().isBlank()) {
 			exception.addMessage("Le nom ne peut pas être laissé vide !");
 		}
 		
-		if (client.getPrenom().isBlank()) {
+		if (client.getPrenom() == null || client.getPrenom().isBlank()) {
 			exception.addMessage("Le prénom ne peut pas être laissé vide !");
 		}
 		
-		if (client.getEmail().isBlank()) {
+		if (client.getEmail() == null || client.getEmail().isBlank()) {
 			exception.addMessage("L'e-mail ne peut pas être laissé vide !");
 		}
 		
-		if (client.getNom().length() > 30) {
+		if (!(client.getNom() == null) && client.getNom().length() > 30) {
 			exception.addMessage("Le nom ne peut pas faire plus de 30 caractères !");
 		}
 		
-		if (client.getPrenom().length() > 30) {
+		if (!(client.getPrenom() == null) && client.getPrenom().length() > 30) {
 			exception.addMessage("Le prénom ne peut pas faire plus de 30 caractères !");
 		}
 		
-		if (client.getLogin().length() > 30) {
+		if (!(client.getLogin() == null) && client.getLogin().length() > 30) {
 			exception.addMessage("L'identifiant ne peut pas faire plus de 30 caractères !");
 		}
 		
-		if (client.getEmail().length() > 60) {
+		if (!(client.getEmail() == null) && client.getEmail().length() > 60) {
 			exception.addMessage("L'e-mail ne peut pas faire plus de 60 caractères !");
 		}
 		
-		if (client.getTelephone().length() > 20) {
+		if (!(client.getTelephone() == null) && client.getTelephone().length() > 20) {
 			exception.addMessage("Le numéro de téléphone ne peut pas faire plus de 20 caractères !");
 		}
 		
