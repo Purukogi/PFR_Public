@@ -149,3 +149,7 @@ img.restaurant-image {
     font-weight: 400;
 }
 
+
+input[type=checkbox]{
+    accent-color: #009970;
+}
