@@ -19,26 +19,35 @@
 	    <div class="container vh-100 d-flex align-items-center justify-content-center">
 	        <div class="card p-4 bg-light shadow-lg">
 	            <div class="card-body">
-	                 <c:if test="${empty reservationSuccess}">
+	                <c:if test="${empty reservationSuccess}">
 	                <h1 class="titreformulaire text-center display-6">Formulaire de réservation</h1>
 	                <h2 class="titrereservation text-center">${restaurant.nom}</h2>
+		            <div>   
+		                <c:if test="${not empty erreurs_reservation}">
+							<div class="alert alert-danger">
+							<ul>
+								<c:forEach var="message" items="${erreurs_reservation }">
+									<li class="text-center">${message }</li>
+								</c:forEach>
+							</ul>
+							</div>
+						</c:if>
+	                </div> 
 	                <form action="reservation" method="post">
 	                    <input type="hidden" name="idRestaurant" id="idRestaurant" value="${restaurant.id}">
 	                    <div class="mb-3">
 	                        <label for="date" class="form-label">Date :</label>
 	                        <input type="date" name="date" id="date" class="form-control" required>
 	                    </div>
-	
-	                    <div class="mb-3">
+						<div class="mb-3">
 						    <label for="horaire" class="form-label">Horaire :</label>
 						    <select name="horaire" id="horaire" class="form-control" required>
-						        <option value="12:00">12:00</option>
-						        <option value="12:15">12:15</option>
-						        <option value="12:30">12:30</option>
-						        <option value="12:45">12:45</option>
-						        <option value="13:00">13:00</option>
-						        <option value="13:15">13:15</option>
-						        <option value="13:30">13:30</option>
+						        <c:forEach var="heure" begin="12" end="21" step="1">
+						            <c:forEach var="minute" begin="0" end="30" step="30">
+						                <c:set var="formattedTime" value="${(heure < 10 ? '0' : '') + heure}:${(minute == 0 ? '00' : (minute < 10 ? '0' : '') + minute)}" />
+						                <option value="${formattedTime}">${formattedTime}</option>
+						            </c:forEach>
+						        </c:forEach>
 						    </select>
 						</div>
 						<div class="mb-3">
@@ -73,6 +82,5 @@
 	    </div>
 	</main>
 	<%@include file="fragments/footer.jspf" %>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

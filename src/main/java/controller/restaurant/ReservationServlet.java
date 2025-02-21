@@ -68,8 +68,9 @@ public class ReservationServlet extends HttpServlet {
             }
             
             response.sendRedirect("reservation?id=" + idRestaurant);
-        } catch (NumberFormatException | DateTimeParseException | ReservationException e) {
-            request.setAttribute("erreur", "Données invalides. Veuillez réessayer.");
+        } catch (ReservationException e) {
+            request.setAttribute("erreurs_reservation", e.getMessages());
+            request.setAttribute("restaurant", restaurant);
             request.getRequestDispatcher("/WEB-INF/jsp/reservation.jsp").forward(request, response);
         }
     }
