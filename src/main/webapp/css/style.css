@@ -118,24 +118,6 @@ h2 {
 	height: 80vh;
 }
 
-#formulaire_profil, #formulaire_modif_profil {
-	width: 100%;
-	height: 80vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-#formulaire_profil_contenu, #formulaire_modification_contenu {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 20px;
-}
-
-.formulaire_utilisateur {
-	height: 80vh;
-}
-
 .taille-navbar {
 	padding-top: 140px;
 }
