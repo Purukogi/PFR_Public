@@ -15,63 +15,67 @@
 </head>
 <body>
 	<%@include file="fragments/header.jspf" %>
-	<main>
-		<div id="formulaire_modif_profil">
-			<form action="modification" method="POST">
-			
-			<div >
-			<c:if test="${!empty erreur_mdp}">
-				<div id="erreur_mdp" class="alert alert-danger">
-					${erreur_mdp }
-				</div>
-			</c:if>
-			<c:if test="${!empty erreurs_modification }">
-				<div id="erreurs_modification" class="alert alert-danger">
-				<ul>
-					<c:forEach var="message" items="${erreurs_modification }">
-						<li>${message }</li>
-					</c:forEach>
-				</ul>
-				</div>
-			</c:if>			
-			</div>
-			
-			<div id="formulaire_modification_contenu">			
-				<div id="profil_col1">
-					<div>
-						<label for="prenom">Prénom :</label>
-						<input type="text" name="prenom" id="prenom" placeholder="Votre prénom" value="${sessionScope.utilisateur.prenom }" class="form-control">
+	<main>	
+		<div class="container d-flex align-items-center justify-content-center formulaire_utilisateur">
+	        <div class="card p-4 bg-light shadow-lg">
+	            <div class="card-body">
+	                <h1 class="titreformulaire text-center display-6">Modifiez votre profil</h1>
+	                <div>
+						<c:if test="${!empty erreur_mdp}">
+							<div id="erreur_mdp" class="alert alert-danger">
+								${erreur_mdp }
+							</div>
+						</c:if>
+						<c:if test="${!empty erreurs_modification }">
+							<div id="erreurs_modification" class="alert alert-danger">
+								<ul>
+									<c:forEach var="message" items="${erreurs_modification }">
+										<li>${message }</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</c:if>			
 					</div>
-					<div>
-						<label for="email">Email :</label>
-						<input type="text" name="email" id="email" placeholder="Adresse E-Mail" value="${sessionScope.utilisateur.email }" class="form-control"> 
-					</div>
-					<div>
-						<label for="telephone">Numéro de téléphone :</label>
-						<input type="text" name="telephone" id="telephone" placeholder="Numéro de téléphone" value="${sessionScope.utilisateur.telephone }" class="form-control">
-					</div>					
-				</div>
-				<div id="profil_col2">
-					<div>
-						<label for="nom">Nom :</label>
-						<input type="text" name="nom" id="nom" placeholder="Votre nom" value="${sessionScope.utilisateur.nom }" class="form-control">
-					</div>
-					<div>
-						<label for="identifiant">Identifiant :</label>
-						<input type="text" name="identifiant" id="identifiant" placeholder="Identifiant" value="${sessionScope.utilisateur.login }" class="form-control">
-					</div>			
-				</div>							
-			</div>
-			<div>
-				<label for="mdp">Entrez votre mot de passe pour confirmer :</label>
-				<input type="password" name="mdp" id="mdp" class="form-control">
-			</div>
-			<div id="inscription_bouton">				
-				<input type="submit" value="Modifier" class="btn btn-primary">
-			</div>
-			</form>
-		</div>
+	                <form action="modification" method="POST">			
+						<div class="container d-flex gap-3">			
+							<div id="profil_col1">
+								<div>
+									<label for="prenom">Prénom :</label>
+									<input type="text" name="prenom" id="prenom" placeholder="Votre prénom" value="${sessionScope.utilisateur.prenom }" class="form-control">
+								</div>
+								<div>
+									<label for="email">Email :</label>
+									<input type="text" name="email" id="email" placeholder="Adresse E-Mail" value="${sessionScope.utilisateur.email }" class="form-control"> 
+								</div>
+								<div>
+									<label for="telephone">Numéro de téléphone :</label>
+									<input type="text" name="telephone" id="telephone" placeholder="Numéro de téléphone" value="${sessionScope.utilisateur.telephone }" class="form-control">
+								</div>					
+							</div>
+							<div id="profil_col2">
+								<div>
+									<label for="nom">Nom :</label>
+									<input type="text" name="nom" id="nom" placeholder="Votre nom" value="${sessionScope.utilisateur.nom }" class="form-control">
+								</div>
+								<div>
+									<label for="identifiant">Identifiant :</label>
+									<input type="text" name="identifiant" id="identifiant" placeholder="Identifiant" value="${sessionScope.utilisateur.login }" class="form-control">
+								</div>			
+							</div>							
+						</div>
+						<div class="container w-75">
+							<label for="mdp">Entrez votre mot de passe pour confirmer :</label>
+							<input type="password" name="mdp" id="mdp" class="form-control">
+						</div>
+						<div class="text-center">				
+							<input type="submit" value="Modifier" class="btn btn-primary mt-3">
+						</div>
+					</form>
+	            </div>
+	        </div>
+	    </div>
 	</main>
 	<%@include file="fragments/footer.jspf" %>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
